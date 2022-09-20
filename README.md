@@ -41,7 +41,7 @@
 
 ## 팀 멤버
 
-김경수 – [@트위터 주소](https://twitter.com/dbader_org) – tdj04131@gmail.com  
-김현학 – [@트위터 주소](https://twitter.com/dbader_org) – rlagusgkr98@gmail.com  
-윤진 – [@트위터 주소](https://twitter.com/dbader_org) – ideasidus@gmail.com  
-정명원– [@트위터 주소](https://twitter.com/dbader_org) – ac980925@gmail.com  
+김경수 – [@깃허브 주소](https://github.com/Roy052) – tdj04131@gmail.com  
+김현학 – [@깃허브 주소](https://github.com/crihit) – rlagusgkr98@gmail.com  
+윤진 – [@깃허브 주소](https://github.com/ideasidus) – ideasidus@gmail.com  
+정명원– [@깃허브 주소](https://github.com/0rdinary) – ac980925@gmail.com  

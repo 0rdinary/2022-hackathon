@@ -12,4 +12,7 @@ public class IndexController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/api/hello")
+    public String hello() { return "Hi. This is Spring speaking."; }
 }

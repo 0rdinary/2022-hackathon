@@ -24,13 +24,27 @@
 
 ## 실행 환경 
 
-### 1. 서버 실행 (도커 활용) [@도커 이미지 주소](https://hub.docker.com/repository/docker/0rdinary/daeily)
-
-```sh
-docker docker pull 0rdinary/daeily
-
+### 1. 서버 실행 (Docker 활용) [@Docker 이미지 주소](https://hub.docker.com/repository/docker/0rdinary/daeily)
+우선 Docker 이미지를 받습니다.
+```shell
+docker pull 0rdinary/daeily
 ```
-
+Docker 이미지가 제대로 받아졌는지 확인합니다.
+```shell
+docker images
+```
+```shell
+REPOSITORY        TAG       IMAGE ID       CREATED        SIZE
+0rdinary/daeily   0.0.1     418f32703b88   9 hours ago    484MB
+```
+그 후 Docker 컨테이너를 실행시킵니다.
+```shell
+docker run -p [외부 Port]:[Docker Port] [Image ID]
+```
+기본 Port는 외부 80, Docker 8080입니다.
+```shell
+docker run -p 80:8080 418f32703b88
+```
 ## 사용 예제
 
 업데이트 예정입니다.
@@ -50,7 +64,7 @@ docker docker pull 0rdinary/daeily
 
 ## 팀 멤버
 
-김경수 – [@깃허브 주소](https://github.com/Roy052) – tdj04131@gmail.com  
-김현학 – [@깃허브 주소](https://github.com/crihit) – rlagusgkr98@gmail.com  
-윤진 – [@깃허브 주소](https://github.com/ideasidus) – ideasidus@gmail.com  
-정명원– [@깃허브 주소](https://github.com/0rdinary) – ac980925@gmail.com  
+김경수 – [@Github](https://github.com/Roy052) – tdj04131@gmail.com  
+김현학 – [@Github](https://github.com/crihit) – rlagusgkr98@gmail.com  
+윤진 – [@Github](https://github.com/ideasidus) – ideasidus@gmail.com  
+정명원– [@Github](https://github.com/0rdinary) – ac980925@gmail.com  

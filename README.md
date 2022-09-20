@@ -1,5 +1,7 @@
 # 대일리
+
 ## 2022 해커톤 팀 치킨밴딧
+
 > (대)구의 (일)상을 (이)롭게
 
 <!--[![NPM Version][npm-image]][npm-url]-->
@@ -22,7 +24,7 @@
 
 ## 사용 예제
 
-업데이트 예정입니다.  
+업데이트 예정입니다.
 
 ## 개발 환경 설정
 
@@ -39,7 +41,7 @@
 
 ## 팀 멤버
 
- 김경수 – [@트위터 주소](https://twitter.com/dbader_org) – tdj04131@gmail.com  
- 김현학 – [@트위터 주소](https://twitter.com/dbader_org) – rlagusgkr98@gmail.com  
- 윤진 – [@트위터 주소](https://twitter.com/dbader_org) – ideasidus@gmail.com  
- 정명원– [@트위터 주소](https://twitter.com/dbader_org) – ac980925@gmail.com  
+김경수 – [@트위터 주소](https://twitter.com/dbader_org) – tdj04131@gmail.com  
+김현학 – [@트위터 주소](https://twitter.com/dbader_org) – rlagusgkr98@gmail.com  
+윤진 – [@트위터 주소](https://twitter.com/dbader_org) – ideasidus@gmail.com  
+정명원– [@트위터 주소](https://twitter.com/dbader_org) – ac980925@gmail.com  

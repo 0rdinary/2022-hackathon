@@ -22,6 +22,15 @@
 
 ```  
 
+## 실행 환경 
+
+### 1. 서버 실행 (도커 활용) [@도커 이미지 주소](https://hub.docker.com/repository/docker/0rdinary/daeily)
+
+```sh
+docker docker pull 0rdinary/daeily
+
+```
+
 ## 사용 예제
 
 업데이트 예정입니다.

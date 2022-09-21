@@ -1,0 +1,12 @@
+version: '3'
+services:
+  backend:
+    image: "0rdinary/daeily"
+    container_name: backend
+    ports:
+      - "8080:8080"
+  frontend:
+    image: "0rdinary/daeily-front"
+    container_name: frontend
+    ports:
+      - "80:3000"

@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.MobileAppBar{
+  color: #D91439;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

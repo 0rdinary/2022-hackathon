@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { BrowserView, MobileView } from 'react-device-detect';
+import {BrowserRouter as Router,Routes, Route, Link} from "react-router-dom";
+import Home from "./Pages/Home"
+import Navbar from "./Pages/Navbar"
 
 function App() {
    const [hello, setHello] = useState('')
@@ -12,14 +14,17 @@ function App() {
     }, []);
 
     return (
+        <Router>
         <div>
-            <BrowserView>
-                데스크톱 페이지 입니다 : {hello}
-            </BrowserView>
-            <MobileView>
-                모바일 페이지 입니다 : {hello}
-            </MobileView>
+            <div>
+                <Navbar/>
+            </div>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+            </Routes>
+            
         </div>
+        </Router>
     );
 }
 

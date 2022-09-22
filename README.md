@@ -24,8 +24,8 @@
 명령 실행 시 Docker Hub로 부터 [0rdinary/daeily](https://hub.docker.com/r/0rdinary/daeily)
 와 [0rdinary/daeily-front](https://hub.docker.com/r/0rdinary/daeily-front) 의 이미지를 내려받습니다.
 
-**Note**
-약 500MB의 공간을 필요로 하므로 미리 확인하여 주십시오.
+>**Note**
+>약 500MB의 공간을 필요로 하므로 미리 확인하여 주십시오.
 해당 프로그램은 80번 PORT의 개방을 필요로 합니다. 
 
 ## 사용 예제
@@ -33,8 +33,8 @@
 업데이트 예정입니다.
 
 ## 개발 환경 설정
-**Warning**
-해당 방법은 Spring과 React간의 통신이 제한됩니다.
+>**Warning**
+>해당 방법은 Spring과 React간의 통신이 제한됩니다.
 
 backend 디렉토리에서 아래의 명령어로 Spring을 빌드할 수 있습니다.
 ```shell

@@ -1,0 +1,22 @@
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.Searchbar{
+    vertical-align: middle;
+}
+  
+.Logo{
+    display: inline-block;
+    vertical-align: left;
+    margin: 0.5rem;
+}
+
+.MenuButton{
+    text-align: center;
+    margin: .25rem;
+    padding: .5rem 1rem;
+}
+  

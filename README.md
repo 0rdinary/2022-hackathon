@@ -6,41 +6,43 @@
 <!--[![Build Status][travis-image]][travis-url]-->
 <!--[![Downloads Stats][npm-downloads]][npm-url]-->
 
-1. 건의하기
-2. 대구광역시 공지, 혜택
-3. 현재 인기 안건 (카테고리별로 볼 수 있음)
-4. 게시 기능 (투표도 가능)
-5. 회원가입
+## 주요 기능
+>* 대구시의 정책 홍보(팝업)
+>* 대구시에 대한 건의 게시
+>* 건의사항에 대한 주민여론을 확인하기 위한 투표 및 댓글작성
+
+## 활용 방법
+임시  
+[![Video Label](http://img.youtube.com/vi/uLR1RNqJ1Mw/0.jpg)](https://youtu.be/uLR1RNqJ1Mw?t=0s)
 
 ## 설치 및 실행 방법
-
-### Docker를 활용하여 실행
-우선 Docker-compose 설정파일 [docker-compose.yml](https://github.com/0rdinary/2022-hackathon/blob/main/docker-compose.yml)
-을 준비합니다.  
-그 후 해당 파일이 있는 위치로 가서 아래 명령을 실행시킵니다.
+### Spring을 빌드
+backend 디렉토리로 이동 후 아래의 명령어로 Spring을 빌드합니다.
 ```shell
- docker-compose up
+gradlew build --exclude-task test
 ```
-명령 실행 시 Docker Hub로 부터 [0rdinary/daeily](https://hub.docker.com/r/0rdinary/daeily)
-와 [0rdinary/daeily-front](https://hub.docker.com/r/0rdinary/daeily-front) 의 이미지를 내려받습니다.
+그 후 Firebase에 연결하기 위한 비공개 키 json파일을 해당 디렉토리에 위치시킵니다.
+### Docker를 사용하여 실행
+다시 최상위 디렉토리로 이동한 후 아래의 명령을 실행시켜 서버를 구동합니다.
+```shell
+ docker-compose up --build
+```
+명령 실행 시 Docker Hub로 부터 [0rdinary/daeily-front](https://hub.docker.com/r/0rdinary/daeily-front) 의 이미지를 내려받습니다.
 
 >**Note**
 >약 500MB의 공간을 필요로 하므로 미리 확인하여 주십시오.
-해당 프로그램은 80번 PORT의 개방을 필요로 합니다. 
-
-## 사용 예제
-
-업데이트 예정입니다.
+해당 프로그램은 80번 PORT의 개방을 필요로 합니다.
 
 ## 개발 환경 설정
 >**Warning**
->해당 방법은 Spring과 React간의 통신이 제한됩니다.
+>해당 방법은 Spring과 React간의 통신이 제한될 가능성이 있습니다.
 
 backend 디렉토리에서 아래의 명령어로 Spring을 빌드할 수 있습니다.
 ```shell
 gradlew build --exclude-task test
 ```
-이후 backend/build/libs 디렉토리에서 아래의 명령어로 Spring을 실행시킬 수 있습니다.
+backend/build/libs 디렉토리로 이동하여 Firebase에 연결하기 위한 비공개 키 json파일을 해당 디렉토리에 위치시킵니다.   
+그리고 아래의 명령어로 Spring을 실행시킬 수 있습니다.
 ```shell
 java -jar daeily-{version}-SNAPSHOT.jar
 ```
@@ -52,14 +54,10 @@ npm install
 ```shell
 npm run start
 ```
-## 업데이트 내역
-
-* 0.0.1
-    * 작업 진행 중
 
 ## 팀 멤버
-
-김경수 – [@Github](https://github.com/Roy052) – tdj04131@gmail.com  
-김현학 – [@Github](https://github.com/crihit) – rlagusgkr98@gmail.com  
-윤진 – [@Github](https://github.com/ideasidus) – ideasidus@gmail.com  
-정명원– [@Github](https://github.com/0rdinary) – ac980925@gmail.com  
+>### 치킨밴딧
+>* 김경수 – [@Github](https://github.com/Roy052) – tdj04131@gmail.com  
+>* 김현학 – [@Github](https://github.com/crihit) – rlagusgkr98@gmail.com  
+>* 윤진 – [@Github](https://github.com/ideasidus) – ideasidus@gmail.com  
+>* 정명원– [@Github](https://github.com/0rdinary) – ac980925@gmail.com  

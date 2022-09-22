@@ -35,7 +35,10 @@ gradlew build --exclude-task test
 
 ## 개발 환경 설정
 >**Warning**
->해당 방법은 Spring과 React간의 통신이 제한될 가능성이 있습니다.
+>해당 방법은 Spring과 React간의 통신이 제한됩니다.
+>>**Note**
+>>frontend/src/setupProxy.js의 target을 아래와 같이 수정할 시 통신가능  
+>> ```target: 'http://localhost:8080'```
 
 backend 디렉토리에서 아래의 명령어로 Spring을 빌드할 수 있습니다.
 ```shell

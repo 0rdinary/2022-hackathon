@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import './Board.css'
 
 const columns = [
     { id: 'num', label: '번호', minWidth: 50 },
@@ -41,6 +42,11 @@ function Board() {
   };
 
   return (
+    <div className="Board">
+      <div>
+        <h1>제안 목록</h1>
+      </div>
+      <div className="BoardTable">
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -89,6 +95,8 @@ function Board() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
+    </div>
   );
 }
 

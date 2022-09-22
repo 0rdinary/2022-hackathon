@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton} from "@mui/material";
+import { AppBar, Toolbar, IconButton, Grid} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import Icon from "../Images/Daeily_Icon.png";
@@ -48,23 +48,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }));
 
 function Navbar(){
-    
-
     return(
         <div>
         <AppBar position="static" style={{ background: '#FFFFFF' }}>
             <Toolbar>
                 <div>
-                    <Link to="/" className="Logo">
+                  <Grid container alignItems="stretch">
+                    <Grid item xs>
+                    <Link to="/">
                         <img src={Icon}/>
                     </Link>
+                    </Grid>
+                    <Grid item xs>
                     <Link to="/board">
                         Board
                     </Link>
+                    </Grid>
+                    <Grid item xs>
                     <Link to="/proposal">
                         Proposal
                     </Link>
-                    <Search className="Searchbar">
+                    </Grid>
+                    <Grid item xs>
+                    <Search>
                         <SearchIconWrapper>
                         <SearchIcon />
                     </SearchIconWrapper>
@@ -73,9 +79,13 @@ function Navbar(){
                         inputProps={{ 'aria-label': 'search' }}
                     />
                      </Search>
-                <IconButton className="MenuButton">
+                     </Grid>
+                     <Grid item xs>
+                <IconButton>
                     <MenuIcon/>
                 </IconButton>
+                </Grid>
+                </Grid>
                 </div>
             </Toolbar>
         </AppBar>

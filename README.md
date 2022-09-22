@@ -31,11 +31,11 @@
 업데이트 예정입니다.
 
 ## 개발 환경 설정
-최상위 디렉토리에서 아래의 명령어로 Spring을 실행시킬 수 있습니다.
+backend 디렉토리에서 아래의 명령어로 Spring을 실행시킬 수 있습니다.
 ```shell
 gradlew build --exclude-task test
 ```
-/src/main/frontend 디렉토리에서 아래의 명령어로 React를 실행시킬 수 있습니다.
+frontend 디렉토리에서 아래의 명령어로 React를 실행시킬 수 있습니다.
 ```shell
 npm run start
 ```

@@ -1,5 +1,7 @@
+import { FiberManualRecord, ThumbDown, ThumbUp } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import React from "react";
+import Grid from '@mui/material/Grid';
 import "./Proposal.css"
 
 const columns = [
@@ -24,26 +26,53 @@ const columns = [
 
 function Proposal(){
     return(
-        <div className="proposal">
+    <div>
+        <div className="proposal_head">
             <div>
                 <h3 className="proposalStatus">- {Data.status} -</h3>
             </div>
             <div>
                 <h1>{Data.proposalHeadline}</h1>
             </div>
+            <div className="thumbs">
+                <ThumbUp/> <text className="thumbs_text">{Data.agree}  </text>
+                <text>  |  </text>
+                <ThumbDown/> <text className="thumbs_text">{Data.disagree}</text>
+            </div>
             <div className="box_div">
-                <Box
-                    sx={{width:400, height:100, backgroundColor: '#183459',
-                         justifyContent:"center", alignItems:"center"}}>
-                    
+                <Box component="span"
+                    sx={{width:1000, height:50, backgroundColor: '#183459',
+                         justifyContent:"center", alignItems:"center", border: '1px grey'}}>
+                    <Grid container direction="row" alignItems="center" className="box_inside">
+                        <Grid item xs>
+                        <text className="box_text_category">문제 분류</text>
+                    <text className="box_text"> {Data.tag}</text>
+                        </Grid>
+                        <Grid item xs>
+                        <text className="box_text_category">작성자</text>
+                        <text className="box_text">  {Data.writer}</text>
+                        </Grid>
+                        <Grid item xs>
+                        <text className="box_text_category">작성일자</text>
+                        <text className="box_text">  {Data.date}</text>
+                        </Grid>
+                    </Grid>
                 </Box>
             </div>
+        </div>
+        <div className="proposal_body">
+            <div>
+                <h2>제안 내용</h2>
+            </div>
+            <hr/>
             <div>
                 <text className="proposalContent">
                 {Data.proposalContent}
                 </text>
             </div>
         </div>
+    </div>
+        
     )  
 }
 

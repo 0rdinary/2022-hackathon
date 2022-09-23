@@ -14,7 +14,7 @@
 ## 활용 방법
 임시  
 [![Video Label](http://img.youtube.com/vi/uLR1RNqJ1Mw/0.jpg)](https://youtu.be/uLR1RNqJ1Mw?t=0s)
-
+---
 ## 설치 및 실행 방법
 ### Spring을 빌드
 backend 디렉토리로 이동 후 아래의 명령어로 Spring을 빌드합니다.
@@ -32,7 +32,7 @@ gradlew build --exclude-task test
 >**Note**
 >약 500MB의 공간을 필요로 하므로 미리 확인하여 주십시오.
 해당 프로그램은 80번 PORT의 개방을 필요로 합니다.
-
+---
 ## 개발 환경 설정
 >**Warning**
 >해당 방법은 Spring과 React간의 통신이 제한됩니다.
@@ -57,7 +57,7 @@ npm install
 ```shell
 npm run start
 ```
-
+---
 ## 팀 멤버
 >### 치킨밴딧
 >* 김경수 – [@Github](https://github.com/Roy052) – tdj04131@gmail.com  

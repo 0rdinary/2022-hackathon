@@ -21,8 +21,18 @@ public class IndexController {
     @GetMapping("/api/hello")
     public String hello() { return "Hi. This is Spring speaking."; }
 
-    @GetMapping("/api/dbtest")
-    public String getMemberDetail(@RequestParam String doc) throws Exception{
-        return firebaseService.selectUser(doc);
+    @GetMapping("/api/doc")
+    public String getDocument(@RequestParam String id) throws Exception{
+        return firebaseService.selectDocument(id);
+    }
+
+    @GetMapping("/api/doc/comment")
+    public String getDocComment(@RequestParam String id) throws Exception{
+        return firebaseService.selectComment(id);
+    }
+
+    @GetMapping("/api/docList")
+    public String getDocList() throws Exception{
+        return firebaseService.selectDocList();
     }
 }

@@ -1,4 +1,4 @@
-package com.chickenbandits.daeily.service.unit;
+package com.chickenbandits.daeily.domain.document;
 
 import com.google.cloud.Timestamp;
 

@@ -1,8 +1,8 @@
 package com.chickenbandits.daeily.service;
 
-import com.chickenbandits.daeily.service.unit.Comment;
-import com.chickenbandits.daeily.service.unit.DocList;
-import com.chickenbandits.daeily.service.unit.Document;
+import com.chickenbandits.daeily.domain.document.Comment;
+import com.chickenbandits.daeily.domain.document.DocList;
+import com.chickenbandits.daeily.domain.document.Document;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -59,11 +59,11 @@ public class FirebaseService {
         }
         return commentList;
     }
-    public ArrayList<DocList> selectDocList() throws Exception{
+    public List<DocList> selectDocList() throws Exception{
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("public", true).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
-        ArrayList<DocList> docList = new ArrayList<>();
+        List<DocList> docList = new ArrayList<>();
         for (DocumentSnapshot document : documents) {
             docList.add(document.toObject(DocList.class));
         }

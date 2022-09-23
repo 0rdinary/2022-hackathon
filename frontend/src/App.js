@@ -15,15 +15,15 @@ const menuItems = [
 function App() {
    const [data, setData] = useState('')
 
-    useEffect(() => {
-            axios.get('/api/dbtest', {
-                params: {
-                    doc: "iOeMpq8T604tKL5Cuh9w"
-                }
-            })
-                .then(response => setData(response.data))
-                .catch(error => console.log(error))
-        }, []);
+//    useEffect(() => {
+//            axios.get('/api/dbtest', {
+//                params: {
+//                    doc: "iOeMpq8T604tKL5Cuh9w"
+//                }
+//            })
+//                .then(response => setData(response.data))
+//                .catch(error => console.log(error))
+//        }, []);
 
     return (
         <Router>

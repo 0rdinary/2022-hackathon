@@ -26,7 +26,8 @@ const columns = [
 
 function Proposal(){
     return(
-    <div>
+    <div className="proposal">
+        <Box sx={{width:1000}}>
         <div className="proposal_head">
             <div>
                 <h3 className="proposalStatus">- {Data.status} -</h3>
@@ -64,15 +65,17 @@ function Proposal(){
             <div>
                 <h2>제안 내용</h2>
             </div>
-            <hr/>
+            <div>
+            <hr className="line"/>
+            </div>
             <div>
                 <text className="proposalContent">
                 {Data.proposalContent}
                 </text>
             </div>
         </div>
+        </Box>
     </div>
-        
     )  
 }
 

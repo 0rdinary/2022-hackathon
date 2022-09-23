@@ -1,0 +1,14 @@
+.home{
+    display: flex;
+    justify-content: center;
+}
+.mainbox_tag{
+    font-size: large;
+    color: #737373;
+    margin-top: 2rem;
+}
+
+.mainbox_head{
+    font-size: x-large;
+    margin-top: 2rem;
+}

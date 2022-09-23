@@ -5,6 +5,8 @@ import Home from "./Pages/Home";
 import Navbar from "./Pages/Navbar";
 import Board from "./Pages/Board";
 import Proposal from "./Pages/Proposal";
+import Profile from './Pages/Profile';
+import ProposalWrite from './Pages/Proposal_Write';
 
 const menuItems = [
     { name: 'home', label: '메인화면' },
@@ -33,6 +35,8 @@ function App() {
                     <Route path="/" element={<Home/>} />
                     <Route path="/board" element={<Board/>}/>
                     <Route path="/proposal" element={<Proposal/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/proposal/write" element={<ProposalWrite/>}/>
                 </Routes>
             </div>
         </Router>

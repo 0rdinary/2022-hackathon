@@ -1,5 +1,6 @@
 .proposal{
-    margin-top: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .proposal_head{
@@ -23,6 +24,7 @@
     display: flex;
     justify-content: center;
     opacity: 0.8;
+    padding-top: 2rem;
     padding-bottom: 1rem;
 }
 
@@ -51,4 +53,34 @@
 .proposalContent{
     font-weight: 500;
     white-space: pre-line;
+}
+
+.line{
+    margin: 30px -20px 20px;
+    border: 0;
+    border-top: 1px solid #c9c7c7;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.proposal_input_box{
+    position:absolute;
+    border:solid;
+    border-color: #e8e8e8;
+    border-width: 0 1px;
+    width:100%;
+}
+
+.proposal_input_head{
+    outline: none;
+    border: none;
+    font-size: xx-large;
+}
+
+.proposal_input_body{
+    outline: none;
+    border: none;
+    font-size: x-large;
 }

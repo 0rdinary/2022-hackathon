@@ -90,7 +90,7 @@ function Navbar(){
 
     return (
       <Box class="Navbar" sx={{ display: 'flex'}}>
-        <AppBar elevation={1} position="fixed" open={open} style={{ background: '#D91438'}}>
+        <AppBar elevation={1} position="static" open={open} style={{ background: '#D91438'}}>
           <Toolbar class="Header">
             <Link to= "/">
               <img src={Icon}/>

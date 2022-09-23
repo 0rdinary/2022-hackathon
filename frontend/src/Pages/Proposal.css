@@ -1,0 +1,12 @@
+.proposal{
+    margin: 0 auto;
+}
+
+.proposalStatus{
+    padding-top: 3rem;
+    color:#737373;
+}
+
+.proposalContent{
+    font-weight: 500;
+}

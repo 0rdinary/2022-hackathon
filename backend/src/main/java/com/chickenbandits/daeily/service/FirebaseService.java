@@ -1,4 +1,4 @@
-package com.chickenbandits.daeily;
+package com.chickenbandits.daeily.service;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentSnapshot;

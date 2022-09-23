@@ -1,4 +1,4 @@
-package com.chickenbandits.daeily;
+package com.chickenbandits.daeily.service;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;

@@ -1,8 +1,10 @@
-.Navbar{
+.Header{
     display: flex;
     justify-content: space-between;
+    padding-left: 2vw;
+    padding-right: 2vw;
     align-items: center;
-  }
+}
   
 .Searchbar{
     vertical-align: middle;

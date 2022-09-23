@@ -6,28 +6,35 @@ import Navbar from "./Pages/Navbar";
 import Board from "./Pages/Board";
 import Proposal from "./Pages/Proposal";
 
+const menuItems = [
+    { name: 'home', label: '메인화면' },
+    { name: 'board', label: '게시판' },
+    { name: 'proposal', label: '제안' }
+]
+
 function App() {
-   const [hello, setHello] = useState('')
+   const [data, setData] = useState('')
 
     useEffect(() => {
-        axios.get('/api/hello')
-        .then(response => setHello(response.data))
-        .catch(error => console.log(error))
-    }, []);
+            axios.get('/api/dbtest', {
+                params: {
+                    doc: "iOeMpq8T604tKL5Cuh9w"
+                }
+            })
+                .then(response => setData(response.data))
+                .catch(error => console.log(error))
+        }, []);
 
     return (
         <Router>
-        <div>
             <div>
-                <Navbar/>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home/>} />
+                    <Route path="/board" element={<Board/>}/>
+                    <Route path="/proposal" element={<Proposal/>}/>
+                </Routes>
             </div>
-            <Routes>
-                <Route path="/" element={<Home/>} />
-                <Route path="/board" element={<Board/>}/>
-                <Route path="/proposal" element={<Proposal/>}/>
-            </Routes>
-            
-        </div>
         </Router>
     );
 }

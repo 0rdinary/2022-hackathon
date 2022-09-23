@@ -8,7 +8,9 @@ services:
     ports:
       - "8080:8080"
   frontend:
-    image: "0rdinary/daeily-front"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: frontend
     ports:
       - "80:3000"

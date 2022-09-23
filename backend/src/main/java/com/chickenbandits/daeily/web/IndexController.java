@@ -1,6 +1,6 @@
 package com.chickenbandits.daeily.web;
 
-import com.chickenbandits.daeily.FirebaseService;
+import com.chickenbandits.daeily.service.FirebaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

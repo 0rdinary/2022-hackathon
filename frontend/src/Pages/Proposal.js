@@ -31,8 +31,10 @@ function Proposal(){
             <div>
                 <h1>{Data.proposalHeadline}</h1>
             </div>
-            <div>
-                <Box sx={{width:400, height:100, backgroundColor: '#183459', justifyContent:"center", alignItems:"center"}}>
+            <div className="box_div">
+                <Box
+                    sx={{width:400, height:100, backgroundColor: '#183459',
+                         justifyContent:"center", alignItems:"center"}}>
                     
                 </Box>
             </div>

@@ -2,6 +2,11 @@
     margin: 0 auto;
 }
 
+.box_div {
+    display: flex;
+    justify-content: center;
+}
+
 .proposalStatus{
     padding-top: 3rem;
     color:#737373;

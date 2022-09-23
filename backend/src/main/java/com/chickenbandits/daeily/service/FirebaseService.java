@@ -1,10 +1,14 @@
 package com.chickenbandits.daeily.service;
 
+import com.chickenbandits.daeily.service.unit.Comment;
+import com.chickenbandits.daeily.service.unit.DocList;
+import com.chickenbandits.daeily.service.unit.Document;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,37 +34,39 @@ public class FirebaseService {
         ApiFuture<WriteResult> apiFuture = db.collection(COLLECTION_DOCUMENT).document("test").set(docData);
     }
 
-    public String selectDocument(String id) throws Exception {
+    public Document selectDocument(String id) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).get();
         DocumentSnapshot documentSnapshot = apiFuture.get();
+
+        Document document = null;
         if(documentSnapshot.exists()) {
-            return documentSnapshot.getData().toString();
+            document = documentSnapshot.toObject(Document.class);
+            return document;
         }
-        return "ERROR";
+        else {
+            return null;
+        }
     }
 
-    public String selectComment(String id) throws Exception {
-        String ans = "";
+    public ArrayList<Comment> selectComment(String id) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).collection(COLLECTION_COMLIST).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
+        ArrayList<Comment> commentList = new ArrayList<>();
         for (DocumentSnapshot document : documents) {
-//            System.out.println(document.getId() + " => " + document.getData().toString());
-            ans += (document.getId() + " => " + document.getData().toString() + "\n");
+            commentList.add(document.toObject(Comment.class));
         }
-        return ans;
+        return commentList;
     }
-    public String selectDocList() throws Exception{
-        String ans = "";
+    public ArrayList<DocList> selectDocList() throws Exception{
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("public", true).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
-
+        ArrayList<DocList> docList = new ArrayList<>();
         for (DocumentSnapshot document : documents) {
-//            System.out.println(document.getId() + " => " + document.getData().toString());
-            ans += (document.getId() + " => " + document.getData().toString() + "\n");
+            docList.add(document.toObject(DocList.class));
         }
-        return ans;
+        return docList;
     }
 }

@@ -1,4 +1,4 @@
-package com.chickenbandits.daeily.service;
+package com.chickenbandits.daeily.service.unit;
 
 public class Comment {
     public String getContent() {

@@ -61,12 +61,28 @@ public class FirebaseService {
     }
     public List<DocList> selectDocList() throws Exception{
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("public", true).get();
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
         List<DocList> docList = new ArrayList<>();
         for (DocumentSnapshot document : documents) {
             docList.add(document.toObject(DocList.class));
         }
         return docList;
+    }
+
+    public List<Document> selectDocumentByTag(String tag) throws Exception {
+        List<DocList> docList = selectDocList();
+        List<Document> documents = new ArrayList<>();
+
+        int docList_size = docList.size();
+        Document doc;
+        for (int i = 0; i < docList_size; i++) {
+            doc = selectDocument(docList.get(i).getId());
+
+            if (doc.getTag().equals(tag)) {
+                documents.add(doc);
+            }
+        }
+        return documents;
     }
 }

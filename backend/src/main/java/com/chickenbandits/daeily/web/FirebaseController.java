@@ -37,15 +37,7 @@ public class FirebaseController {
     }
 
     @GetMapping("/documents")
-    public List<Document> getAllDocuments() throws Exception {
-        List<DocList> docList = firebaseService.selectDocList();
-        List<Document> documents = new ArrayList<>();
-
-        int docList_size = docList.size();
-        for (int i = 0; i < docList_size; i++) {
-            documents.add(getDocument(docList.get(i).getId()));
-        }
-
-        return documents;
+    public List<Document> getAllDocuments(@RequestParam String tag) throws Exception {
+        return firebaseService.selectDocumentByTag(tag);
     }
 }

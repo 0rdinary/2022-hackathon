@@ -75,6 +75,8 @@ var directionLink = ["/board", "/proposal", "/profile", "/proposal/write"]
 var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
                  "건강/보건/위생", "산업/경제", "환경", "소방/안전",
                  "도시주택/건설", "행정/재정/세정", "자유게시판"]
+                 var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
+                                 "environment", "safety", "construction", "administration"];
 
 function Navbar(){
     const theme = useTheme();

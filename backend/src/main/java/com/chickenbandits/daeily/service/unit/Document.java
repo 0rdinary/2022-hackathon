@@ -1,5 +1,7 @@
 package com.chickenbandits.daeily.service.unit;
 
+import com.google.cloud.Timestamp;
+
 public class Document {
     public String getTitle() {
         return title;
@@ -7,9 +9,7 @@ public class Document {
     public String getWriter() {
         return writer;
     }
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
     public String getTag() {
         return tag;
     }
@@ -25,6 +25,7 @@ public class Document {
     public int getCommentNum() {
         return commentNum;
     }
+    public Timestamp getDate() { return date; }
 
     public void setTitle(String title) {
         this.title = title;
@@ -50,6 +51,7 @@ public class Document {
     public void setCommentNum(int commentNum) {
         this.commentNum = commentNum;
     }
+    public void setDate(Timestamp date) { this.date = date; }
 
     private String title;
     private String writer;
@@ -59,4 +61,5 @@ public class Document {
     private int up;
     private int down;
     private int commentNum;
+    private Timestamp date;
 }

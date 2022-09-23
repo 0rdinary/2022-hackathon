@@ -1,22 +1,12 @@
 package com.chickenbandits.daeily.service.unit;
 
 public class DocList {
+    public String getId() { return id; }
+    public boolean getIsPublic() { return isPublic; }
+
+    public void setId(String id) { this.id = id; }
+    public void setIsPublic(boolean isPublic) { this.isPublic = isPublic; }
+
     private String id;
-    private boolean _public;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean is_public() {
-        return _public;
-    }
-
-    public void set_public(boolean _public) {
-        this._public = _public;
-    }
+    private boolean isPublic;
 }

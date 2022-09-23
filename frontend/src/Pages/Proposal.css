@@ -1,10 +1,46 @@
 .proposal{
-    margin: 0 auto;
+    margin-top: 0;
+}
+
+.proposal_head{
+    margin: auto;
+}
+
+.proposal_body{
+    padding-top: 3rem;
+    float: left;
+}
+
+.thumbs{
+    height: 50px;
+    line-height: 50px;
+}
+.thumbs_text{
+    font-size: large;
 }
 
 .box_div {
     display: flex;
     justify-content: center;
+    opacity: 0.8;
+    padding-bottom: 1rem;
+}
+
+.box_inside{
+    height: 50px;
+    line-height: 50px;
+}
+
+.box_text_category{
+    color: white;
+    opacity: 1;
+    font-weight: 900;
+    opacity: 1;
+}
+
+.box_text{
+    color: white;
+    opacity: 1;
 }
 
 .proposalStatus{
@@ -14,4 +50,5 @@
 
 .proposalContent{
     font-weight: 500;
+    white-space: pre-line;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
+import { Link, useResolvedPath } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import { useLocation } from 'react-router-dom';
 import './Board.css'
 import { create } from "@mui/material/styles/createTransitions";
+import { Tab } from "@mui/material";
 
 const columns = [
     { id: 'title', label: '제목'},
@@ -21,22 +22,13 @@ const columns = [
     { id: 'up', label: '좋아요'},
   ];
 
-function createData(content) {
-    var title = content['title'];
-    var writer = content['writer'];
-    var date = content['date'];
-    var up = content['up'];
-
-    return {title, writer, date, up};
-}
-
 function Board() {
     const location = useLocation();
     const props = location.state;
+    const [tag, setTag] = useState(props.tag);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [documents, setDocuments] = useState();
-    const [boardContents, setBoardContents] = useState([]);
+    const [documents, setDocuments] = useState([]);
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -46,15 +38,6 @@ function Board() {
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
-
-    const makeBoardContents = (contents) => {
-        var contents_size = contents.length;
-        for (var i = 0; i < contents_size; i++) {
-          const newContent = createData(contents[i]);
-          console.log(newContent);
-          setBoardContents(boardContents => [newContent, ...boardContents]);
-        }
-    }
     
    useEffect(() => {
         axios.get('/api/fb/documents', {
@@ -63,13 +46,28 @@ function Board() {
             }
         })
         .then(response => {
-          setDocuments(documents);
-          // console.log(response.data.list)
-          // console.log(documents);
-          makeBoardContents(response.data.list);
+          var d = response.data.list;
+          var d_size = d.length;
+          console.log(d);
+          
+          for (var i = 0; i < d_size; i++) {
+              var tmp = {}
+              var day = new Date(d[i]['date']['seconds']*1000);
+              console.log(day);
+              tmp['id'] = d[i]['id'];
+              tmp['title'] = d[i]['title'];
+              tmp['writer'] = d[i]['writer'];
+              tmp['date'] = day.toLocaleDateString('ko-KR');;
+              tmp['up'] = d[i]['up'];
+              setDocuments(documents => [tmp, ...documents]);
+          }
         })
         .catch(error => console.log(error));
     }, [])
+
+    useEffect(() => {
+      console.log(documents);
+    }, [documents]);
 
   return (
     <div className="Board">
@@ -89,42 +87,28 @@ function Board() {
                         <TableHead>
                             <TableRow>
                                 {columns.map((column) => (
-                                <TableCell
-                                  key={column.id}
-                                  align={column.align}
-                                  style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
+                                    <TableCell>
+                                        {column.label}
+                                    </TableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {boardContents
-                              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                              .map((row, index) => {
-                                return (
-                                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                                    {columns.map((column, idx) => {
-                                      const value = row[idx];
-                                      return (
-                                        <TableCell key={idx} align={column.align}>
-                                          {column.format && typeof value === 'number'
-                                            ? column.format(value)
-                                            : value}
-                                        </TableCell>
-                                      );
-                                    })}
-                                  </TableRow>
-                                );
-                              })}
+                          {documents.map(({id, title, writer, date, up}) => (
+                              <TableRow key={id}>
+                                  <TableCell>{title}</TableCell>
+                                  <TableCell>{writer}</TableCell>
+                                  <TableCell>{date}</TableCell>
+                                  <TableCell>{up}</TableCell>
+                              </TableRow>
+                          ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <TablePagination
                   rowsPerPageOptions={[10, 25, 100]}
                   component="div"
-                  count={boardContents.length}
+                  count={documents.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}

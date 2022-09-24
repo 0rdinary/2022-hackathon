@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -42,20 +42,30 @@ function DocWrite() {
 
     console.log(doc);
     const submitDoc = () => {
-        Axios.post('/api/fb/insert', {
-            params: {
-                writer: doc.writer,
-                password: doc.password,
-                tag: doc.tag,
-                title: doc.title,
-                content: doc.content,
-                date: {
-                    seconds: Math.floor(new Date().getTime() / 1000),
-                    nanos: 0
-                }
+        axios.post('/api/fb/insert', {
+            // params: {
+            //     writer: doc.writer,
+            //     password: doc.password,
+            //     tag: doc.tag,
+            //     title: doc.title,
+            //     content: doc.content,
+            //     date: {
+            //         seconds: Math.floor(new Date().getTime() / 1000),
+            //         nanos: 0
+            //     }
+            // }
+            writer: doc.writer,
+            password: doc.password,
+            tag: doc.tag,
+            title: doc.title,
+            content: doc.content,
+            date: {
+                seconds: Math.floor(new Date().getTime() / 1000),
+                nanos: 0
             }
-        }).then(()=> {
+        }).then((response)=> {
             alert("등록 완료");
+            console.log(response.data);
         })
     };
 

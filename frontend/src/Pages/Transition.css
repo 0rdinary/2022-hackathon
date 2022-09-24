@@ -1,28 +1,6 @@
 .transition-group {
     position: relative;
   }
-  
-  .fade-enter {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  
-  .fade-enter-active {
-    opacity: 1;
-    transform: translateX(-50%);
-    transition: all 1s ease-in;
-  }
-  
-  .fade-exit {
-    opacity: 1;
-    transform: translateX(-50%);
-  }
-  
-  .fade-exit-active {
-    opacity: 0;
-    transform: translateX(-100%);
-    transition: all 1s ease-in;
-  }
 
   .toLeft-enter {
     opacity: 0;
@@ -31,17 +9,39 @@
   
   .toLeft-enter-active {
     opacity: 1;
-    transform: translateX(-50%) rotateZ(0);
+    transform: translateX(-50%);
     transition: all 1s ease-in;
   }
   
   .toLeft-exit {
     opacity: 1;
-    transform: translateX(-50%) rotateZ(0);
+    transform: translateX(-50%);
   }
   
   .toLeft-exit-active {
     opacity: 0;
-    transform: translateX(-100%) rotateZ(-45deg);
+    transform: translateX(-100%);
     transition: all 1s ease-in;
+  }
+
+  .fade-enter {
+    opacity: 0;
+    transform: translate(0, 25px);
+    z-index: 1;
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translate(0, 0);
+  
+    transition: opacity 250ms ease-out, transform 300ms ease;
+  }
+  .fade-exit {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transform: translate(0, 30px);
+  
+    transition: opacity 250ms ease-out, transform 300ms ease;
   }

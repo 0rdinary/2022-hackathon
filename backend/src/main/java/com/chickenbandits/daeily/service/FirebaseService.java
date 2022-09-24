@@ -25,9 +25,18 @@ public class FirebaseService {
 
     public String insertDocument(HashMap<String, Object> param) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
+        Timestamp timestamp;
         Map<String, Object> docData = new HashMap<>();
         for (String key: param.keySet()) {
-            docData.put(key, param.get(key));
+            if(key=="date")
+            {
+                timestamp = Timestamp.now();
+                docData.put(key, timestamp);
+            }
+            else
+            {
+                docData.put(key, param.get(key));
+            }
         }
         docData.put("up", 0);
         docData.put("down", 0);

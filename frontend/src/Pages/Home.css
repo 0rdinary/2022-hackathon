@@ -1,6 +1,12 @@
 .home{
+    max-width:960px;
+    width: 100vw;
     display: flex;
     justify-content: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 .mainbox_tag{
     font-size: large;
@@ -22,5 +28,9 @@
 
 .category_grid{
     margin-top: 1rem;
-    position: static;
+}
+
+.category_container{
+    display:inline;
+    overflow-x: auto;
 }

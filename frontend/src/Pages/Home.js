@@ -46,54 +46,56 @@ function Home(){
             <div>
                 <h2>주요 제안</h2>  
                 <Box sx={{width:600, height:300, border:1}}>
-                <Grid container direction="column" alignItems="center">
-                <Grid item xs>
-                <text className="mainbox_tag">- {MainProposal.tag} -</text>
+                    <Grid container direction="column" alignItems="center">
+                        <Grid item xs>
+                            <text className="mainbox_tag">- {MainProposal.tag} -</text>
+                        </Grid>
+                        <Grid item xs>
+                            <text className="mainbox_head">{MainProposal.proposalHeadline}</text>
+                        </Grid>
+                        <Grid item xs>
+                            <ThumbUp/> <text>{MainProposal.agree}  </text>
+                            <text>  |  </text>
+                            <ThumbDown/> <text>{MainProposal.disagree}</text>
+                        </Grid>
                     </Grid>
-                    <Grid item xs>
-                    <text className="mainbox_head">{MainProposal.proposalHeadline}</text>
-                    </Grid>
-                    <Grid item xs>
-                    <ThumbUp/> <text>{MainProposal.agree}  </text>
-                <text>  |  </text>
-                <ThumbDown/> <text>{MainProposal.disagree}</text>
-                    </Grid>
-                </Grid>
-            </Box>
-            <div>
-                <h2>카테고리 별</h2>
-                    <Grid container direction="column" alignItems="center" className="category_grid">
-                        <Grid container direction="row" alignItems="center">
-                            {board_name.slice(0,5).map((text, index) => (
+                </Box>
+                <div>
+                    <h2>카테고리 별</h2>
+                    <div className="category_container">
+                        <Grid container direction="column" alignItems="center" className="category_grid">
+                            <Grid container direction="row" alignItems="center">
+                                {board_name.slice(0,5).map((text, index) => (
                                 <Grid item xs>
                                     <Link to={"/board"}
-                                    state={{ name: board_name[index],
-                                    tag: tag_name[index]
-                                }}>
-                                <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
-                                    <SvgIcon component={icons[index]} style={{fontSize:'40px', color: icons_color[index] }} />
-                                </Box>
-                                <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
-                                </Link>
-                            </Grid>
+                                        state={{ name: board_name[index],
+                                        tag: tag_name[index]
+                                    }}>
+                                        <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
+                                            <SvgIcon component={icons[index]} style={{fontSize:'40px', color: icons_color[index] }} />
+                                        </Box>
+                                        <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
+                                    </Link>
+                                </Grid>
                             ))}
+                            </Grid>
+                            <Grid container direction="row" alignItems="center" className="category_grid">
+                                {board_name.slice(5,10).map((text, index) => (
+                                <Grid item xs>
+                                    <Link to={"/board"}
+                                        state={{ name: board_name[index+5],
+                                        tag: tag_name[index+5]
+                                    }}>
+                                        <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
+                                            <SvgIcon component={icons[index + 5]} style={{fontSize:'40px', color: icons_color[index + 5] }} />
+                                        </Box>
+                                        <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px', fontWeight:'500'}} />
+                                    </Link>
+                                </Grid>
+                            ))}
+                            </Grid>
                         </Grid>
-                    <Grid container direction="row" alignItems="center" className="category_grid">
-                        {board_name.slice(5,10).map((text, index) => (
-                            <Grid item xs>
-                                <Link to={"/board"}
-                                state={{ name: board_name[index+5],
-                                tag: tag_name[index+5]
-                            }}>
-                            <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
-                                <SvgIcon component={icons[index + 5]} style={{fontSize:'40px', color: icons_color[index + 5] }} />
-                            </Box>
-                            <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px', fontWeight:'500'}} />
-                            </Link>
-                        </Grid>
-                        ))}
-                    </Grid>
-                    </Grid>
+                    </div>
                 </div>
             </div>
             

@@ -119,7 +119,7 @@ function Navbar(){
         'DeepSkyBlue', 'gold', 'purple'];
 
     return (
-      <Box class="Navbar" sx={{ display: 'flex'}}>
+      <Box className="Navbar" sx={{ display: 'flex'}}>
         <AppBar elevation={1} position="static" open={open} style={{ background: '#808080'}}>
           <Toolbar class="Header">
             <Link to= "/">

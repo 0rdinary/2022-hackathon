@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import { SvgIcon } from "@mui/material";
 import './Home.css'
@@ -6,6 +6,8 @@ import { DonutLarge, ThumbDown, ThumbUp } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
 import ListItemText from '@mui/material/ListItemText';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import {
     ContentPaste,
     DepartureBoard,
@@ -40,6 +42,35 @@ function Home(){
     const icons_color = ["purple", 'DeepSkyBlue', 'green',
         'purple', 'red', 'gold', 'green', 'red',
         'DeepSkyBlue', 'gold', 'purple'];
+    
+        const location = useLocation();
+        const [documents, setDocuments] = useState([]);
+    
+        // useEffect(() => {
+        //     axios.get('/api/fb/top')
+        //     .then(response => {
+        //       var d = response.data.list;
+        //       var d_size = d.length;
+        //       console.log(d);
+              
+        //       for (var i = 0; i < d_size; i++) {
+        //           var tmp = {}
+        //           var day = new Date(d[i]['date']['seconds']*1000);
+        //           console.log(day);
+        //           tmp['id'] = d[i]['id'];
+        //           tmp['title'] = d[i]['title'];
+        //           tmp['tag'] = d[i]['tag'];
+        //           tmp['writer'] = d[i]['writer'];
+        //           tmp['up'] = d[i]['up'];
+        //           setDocuments(documents => [tmp, ...documents]);
+        //       }
+        //     })
+        //     .catch(error => console.log(error));
+        // }, [])
+    
+        useEffect(() => {
+          console.log(documents);
+        }, [documents]);
 
     return(
         <div className="home">
@@ -48,15 +79,13 @@ function Home(){
                 <Box sx={{width:600, height:300, border:1}}>
                     <Grid container direction="column" alignItems="center">
                         <Grid item xs>
-                            <text className="mainbox_tag">- {MainProposal.tag} -</text>
+                            <text className="mainbox_tag">- {} -</text>
                         </Grid>
                         <Grid item xs>
-                            <text className="mainbox_head">{MainProposal.proposalHeadline}</text>
+                            <text className="mainbox_head">{}</text>
                         </Grid>
                         <Grid item xs>
-                            <ThumbUp/> <text>{MainProposal.agree}  </text>
-                            <text>  |  </text>
-                            <ThumbDown/> <text>{MainProposal.disagree}</text>
+                            <ThumbUp/> <text>{}  </text>
                         </Grid>
                     </Grid>
                 </Box>
@@ -98,7 +127,6 @@ function Home(){
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }

@@ -1,0 +1,12 @@
+.Board{
+    max-width:960px;
+    width: 80vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.BoardTable{
+    padding-left: 0.5rem;
+}

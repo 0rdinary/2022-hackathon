@@ -15,4 +15,10 @@
 
 .category_box{
     font-size: x-small;
+    vertical-align: middle;
+}
+
+.category_grid{
+    margin-top: 1rem;
+    position: static;
 }

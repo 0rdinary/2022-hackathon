@@ -20,8 +20,25 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import './Navbar.css';
-import { ContentPaste, DepartureBoard, Diversity1, FamilyRestroom, FireExtinguisher, Fireplace, FireTruck, Foundation, Landscape, MedicalInformation, Paid, Piano, ReceiptLong } from "@mui/icons-material";
+import {
+    Article,
+    ContentPaste,
+    DepartureBoard,
+    Diversity1,
+    FamilyRestroom,
+    Feed,
+    FireExtinguisher,
+    Fireplace,
+    FireTruck,
+    Foundation,
+    Landscape,
+    MedicalInformation,
+    Paid,
+    Piano,
+    ReceiptLong
+} from "@mui/icons-material";
 import Icon from '@mui/material/Icon';
+import {blue, green, lightBlue, pink, purple, red, yellow} from "@mui/material/colors";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -96,6 +113,10 @@ function Navbar(){
       FamilyRestroom, MedicalInformation, Paid, Landscape, 
       FireTruck, Foundation, ReceiptLong, ContentPaste];
 
+    const icons_color = ["purple", 'DeepSkyBlue', 'green',
+        'purple', 'red', 'gold', 'green', 'red',
+        'DeepSkyBlue', 'gold', 'purple'];
+
     return (
       <Box class="Navbar" sx={{ display: 'flex'}}>
         <AppBar elevation={1} position="static" open={open} style={{ background: '#808080'}}>
@@ -158,7 +179,7 @@ function Navbar(){
                         }}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <SvgIcon component={icons[index]} />
+                        <SvgIcon component={icons[index]} style={{ color: icons_color[index] }} />
                       </ListItemIcon>
                       <ListItemText primary={text} />
                     </ListItemButton>

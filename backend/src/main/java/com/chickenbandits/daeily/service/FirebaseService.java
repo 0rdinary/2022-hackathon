@@ -102,8 +102,8 @@ public class FirebaseService {
         DocumentSnapshot documentSnapshot = apiFuture.get();
         DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(id);
 
-        int up = (int)documentSnapshot.get("up");
-        int down = (int)documentSnapshot.get("down");
+        int up = Integer.parseInt(documentSnapshot.get("up").toString());
+        int down = Integer.parseInt(documentSnapshot.get("down").toString());
         String listID = "";
         if(way.equals("up")) {
             up++;

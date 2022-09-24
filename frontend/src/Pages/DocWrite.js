@@ -43,25 +43,14 @@ function DocWrite() {
     console.log(doc);
     const submitDoc = () => {
         axios.post('/api/fb/insert', {
-            // params: {
-            //     writer: doc.writer,
-            //     password: doc.password,
-            //     tag: doc.tag,
-            //     title: doc.title,
-            //     content: doc.content,
-            //     date: {
-            //         seconds: Math.floor(new Date().getTime() / 1000),
-            //         nanos: 0
-            //     }
-            // }
-            writer: doc.writer,
-            password: doc.password,
-            tag: doc.tag,
-            title: doc.title,
-            content: doc.content,
-            date: {
-                seconds: Math.floor(new Date().getTime() / 1000),
-                nanos: 0
+            "writer": doc.writer,
+            "password": doc.password,
+            "tag": doc.tag,
+            "title": doc.title,
+            "content": doc.content,
+            "date": {
+                "seconds": Math.floor(new Date().getTime() / 1000),
+                "nanos": 0
             }
         }).then((response)=> {
             alert("등록 완료");

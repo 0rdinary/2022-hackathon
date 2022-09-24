@@ -27,7 +27,7 @@ public class FirebaseService {
         Firestore db = FirestoreClient.getFirestore();
         Map<String, Object> docData = new HashMap<>();
         for (String key: param.keySet()) {
-            docData.put(key, docData.get(key));
+            docData.put(key, param.get(key));
         }
         docData.put("up", 0);
         docData.put("down", 0);

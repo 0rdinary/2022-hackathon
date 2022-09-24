@@ -28,8 +28,7 @@ public class FirebaseController {
     public String mapRequest(@RequestBody HashMap<String, Object> param) throws Exception{
         System.out.println("param : " + param);
 
-        firebaseService.insertDocument(param);
-        return param.toString();
+        return firebaseService.insertDocument(param);
     }
 
     @GetMapping("/comment")

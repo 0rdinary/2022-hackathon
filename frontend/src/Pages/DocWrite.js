@@ -52,6 +52,10 @@ function DocWrite() {
                 "seconds": Math.floor(new Date().getTime() / 1000),
                 "nanos": 0
             }
+        },{
+            headers:{
+                "Content-Type": "application/json"
+            }
         }).then((response)=> {
             alert("등록 완료");
             console.log(response.data);

@@ -38,18 +38,21 @@ public class FirebaseService {
         return apiFuture.get().getId();
     }
 
-    public Document selectDocument(String id) throws Exception {
+    public String selectDocument(String id) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).get();
         DocumentSnapshot documentSnapshot = apiFuture.get();
 
         Document document = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        String ans = "{\"id\":\""+id+"\",\"content\":";
         if(documentSnapshot.exists()) {
             document = documentSnapshot.toObject(Document.class);
-            return document;
+            ans += objectMapper.writeValueAsString(document) + "}";
+            return ans;
         }
         else {
-            return null;
+            return "{id : ERROR}";
         }
     }
 
@@ -64,44 +67,19 @@ public class FirebaseService {
         return commentList;
     }
 
-    // TODO: 대체 예정
-    public List<DocList> selectDocList() throws Exception{
+    public String selectDocuments(String tag) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).get();
-        List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
-        List<DocList> docList = new ArrayList<>();
-        for (DocumentSnapshot document : documents) {
-            docList.add(document.toObject(DocList.class));
-        }
-        return docList;
-    }
-
-    // TODO: 대체 예정
-    public List<Document> selectDocumentByTag(String tag) throws Exception {
-        List<DocList> docList = selectDocList();
-        List<Document> documents = new ArrayList<>();
-
-        int docList_size = docList.size();
-        Document doc;
-        for (int i = 0; i < docList_size; i++) {
-            doc = selectDocument(docList.get(i).getId());
-
-            if (doc.getTag().equals(tag)) {
-                documents.add(doc);
-            }
-        }
-        return documents;
-    }
-    public List<DocList> selectDocuments(String tag) throws Exception {
-        Firestore db = FirestoreClient.getFirestore();
-        // TODO: DB의 DocList에 Tag 정보 추가
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("tag",tag).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
+
         List<DocList> docList = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String ans = "{\"list\":";
         for (DocumentSnapshot document : documents) {
             docList.add(document.toObject(DocList.class));
         }
-        return docList;
+        ans += objectMapper.writeValueAsString(docList) + "}";
+        return ans;
     }
 
     public String selectDocumentTest(String id) throws Exception {
@@ -118,7 +96,7 @@ public class FirebaseService {
         return ans;
         }
         else {
-            return "{id : ERROR}";
+            return "{\"id\" : \"ERROR\"}";
         }
     }
 }

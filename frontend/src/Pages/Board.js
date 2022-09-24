@@ -57,6 +57,7 @@ function Board() {
         for (var i = 0; i < contents_size; i++) {
           board_contents.push(createData(contents[i]));
         }
+        console.log(board_contents);
     }
     
    useEffect(() => {

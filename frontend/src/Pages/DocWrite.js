@@ -61,23 +61,7 @@ function DocWrite() {
 
     return (
         <div className="write_div">
-            <TextField sx={{mr:'1.6%', width: '47.5%'}}
-                required
-                id="outlined-required"
-                label="닉네임"
-                variant="outlined"
-                name='writer'
-                onChange={docChange}
-            />
-            <TextField sx={{mb: '2%', width: '47.5%'}}
-                required
-                id="outlined-required"
-                label="비밀번호"
-                name='password'
-                variant="outlined"
-                onChange={docChange}
-            />
-            <Select sx={{mr: '1.6%', width: '25%'}}
+            <Select sx={{mr: '1.6%', width: '31%'}}
                 labelId="id-simple-select-label"
                 id="tag-simple-select"
                 value={doc.tag}
@@ -91,7 +75,24 @@ function DocWrite() {
                     )
                 })}
             </Select>
-            <TextField sx={{width: '70%'}}
+            <TextField sx={{mr:'1.6%', width: '31%'}}
+                required
+                id="outlined-required"
+                label="닉네임"
+                variant="outlined"
+                name='writer'
+                onChange={docChange}
+            />
+            <TextField sx={{mb: '1.6%', width: '31%'}}
+                required
+                id="outlined-required"
+                label="비밀번호"
+                name='password'
+                variant="outlined"
+                onChange={docChange}
+            />
+            
+            <TextField sx={{width: '96.5%'}}
                 required
                 id="outlined-required"
                 label="제목"

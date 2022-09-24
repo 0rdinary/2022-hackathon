@@ -1,11 +1,28 @@
 .Board{
-    padding-left: 0.5rem;
+    max-width:960px;
+    width: 80vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.board_header {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 1vh;
 }
 
 .button_div {
     margin-top : 2vh;
     padding-right: 2vw;
     text-align: right;
+}
+
+strong {
+    margin-top: 1vh;
+    width: 80%;
+    font-size: 2em
 }
 
 .BoardTable{

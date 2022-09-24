@@ -6,12 +6,10 @@ import com.chickenbandits.daeily.domain.document.Document;
 import com.chickenbandits.daeily.service.FirebaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,6 +22,14 @@ public class FirebaseController {
     @GetMapping("/doc")
     public Document getDocument(@RequestParam String id) throws Exception{
         return firebaseService.selectDocument(id);
+    }
+
+    @PostMapping("/insert")
+    public String mapRequest(@RequestBody HashMap<String, Object> param) throws Exception{
+        System.out.println("param : " + param);
+
+        firebaseService.insertDocument(param);
+        return param.toString();
     }
 
     @GetMapping("/comment")

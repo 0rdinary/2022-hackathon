@@ -74,8 +74,14 @@ function Board() {
 
   return (
     <div className="Board">
-        <div>
-          <h1>{props.name} 게시판</h1>
+        <div className="board_header">
+          <Link to="/doc/write"
+                state={{
+                  tag: props.tag
+                }}>
+              <Button sx={{mr: 2, mt:2}} variant="contained">작성</Button>
+          </Link>
+          <strong>{props.name}</strong>
         </div>
         <div className="BoardTable">
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -126,14 +132,6 @@ function Board() {
                   onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-            <div className="button_div">
-                <Link to="/doc/write"
-                      state={{
-                        tag: props.tag
-                      }}>
-                    <Button variant="contained">작성하기</Button>
-                </Link>
-            </div>
         </div>
     </div>
   );

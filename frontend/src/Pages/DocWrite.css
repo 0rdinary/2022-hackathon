@@ -1,3 +1,22 @@
 .write_div {
+    margin-top: 3vh;
+    max-width:960px;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.editor_div {
+    display: flex;
+    text-align: center;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    min-height: 50vh;
+}
+
+.ck.ck-editor {
     margin-top: 2vh;
+    margin-left: 1.5vw;
+    width: 96.5%;
 }

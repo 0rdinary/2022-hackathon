@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
+import Button from '@mui/material/Button';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './DocWrite.css';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
@@ -17,35 +22,107 @@ function DocWrite() {
     const location = useLocation();
     const props = location.state;
 
-    const [tag, setTag] = useState(props.tag);
-    const tagChange = (event) => {
-        setTag(event.target.value);
+    const [doc, setDoc] = useState({
+        writer: '',
+        password: '',
+        tag: props.tag,
+        title: '',
+        content: '',
+        date: ''
+    });
+
+    const docChange = (event) => {
+        const { name, value } = event.target;
+
+        setDoc({
+            ...doc,
+            [name]: value
+        })
     }
+
+    console.log(doc);
+    const submitDoc = () => {
+        Axios.post('/api/fb/insert', {
+            params: {
+                writer: doc.writer,
+                password: doc.password,
+                tag: doc.tag,
+                title: doc.title,
+                content: doc.content,
+                date: {
+                    seconds: Math.floor(new Date().getTime() / 1000),
+                    nanos: 0
+                }
+            }
+        }).then(()=> {
+            alert("등록 완료");
+        })
+    };
 
     return (
         <div className="write_div">
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">카테고리</InputLabel>
-                <Select
-                  labelId="tag-select-label"
-                  id="tag-simple-select"
-                  value={tag}
-                  label="카테고리"
-                  onChange={tagChange}
-                >
-                    {board_name.map((name, index) => {
-                        return (
-                            <MenuItem value={tag_name[index]}>{name}</MenuItem>
-                        )
-                    })}
-                </Select>
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Required"
-                    defaultValue="Hello World"
+            <TextField sx={{mr:'1.6%', width: '47.5%'}}
+                required
+                id="outlined-required"
+                label="닉네임"
+                variant="outlined"
+                name='writer'
+                onChange={docChange}
+            />
+            <TextField sx={{mb: '2%', width: '47.5%'}}
+                required
+                id="outlined-required"
+                label="비밀번호"
+                name='password'
+                variant="outlined"
+                onChange={docChange}
+            />
+            <Select sx={{mr: '1.6%', width: '25%'}}
+                labelId="id-simple-select-label"
+                id="tag-simple-select"
+                value={doc.tag}
+                label="카테고리"
+                name='tag'
+                onChange={docChange}
+            >
+                {board_name.map((name, index) => {
+                    return (
+                        <MenuItem value={tag_name[index]}>{name}</MenuItem>
+                    )
+                })}
+            </Select>
+            <TextField sx={{width: '70%'}}
+                required
+                id="outlined-required"
+                label="제목"
+                name='title'
+                onChange={docChange}
+                variant="outlined"
+            />
+            <div clasName="editor_div">
+                <CKEditor
+                    editor={ ClassicEditor }
+                    data=""
+                    onReady={ editor => {
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        setDoc({
+                            ...doc,
+                            content: data
+                        })
+                        console.log(doc);
+                    } }
+                    onBlur={ ( event, editor ) => {
+                    } }
+                    onFocus={ ( event, editor ) => {
+                    } }
                 />
-            </FormControl>
+            </div>
+            <Button sx={{mr: 2, mt:2}}
+              variant="contained"
+              onClick={submitDoc}
+              >작성</Button>
         </div>
     );
 }

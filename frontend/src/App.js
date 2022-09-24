@@ -12,7 +12,7 @@ import ProposalWrite from './Pages/Proposal_Write';
 function App() {
     return (
         <Router>
-            <div>
+            <div className='navbar_div'>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home/>} />

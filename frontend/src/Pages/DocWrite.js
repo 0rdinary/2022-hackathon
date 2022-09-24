@@ -90,6 +90,7 @@ function DocWrite() {
                 required
                 id="outlined-required"
                 label="비밀번호"
+                type="password"
                 name='password'
                 variant="outlined"
                 onChange={docChange}

@@ -40,12 +40,16 @@ function createDataAccount(id, pw) {
     }
 
 function Profile(){
-    const location = useLocation();
-    const props = location.state;
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [documents, setDocuments] = useState();
-    const [boardContents, setBoardContents] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [documents, setDocuments] = useState();
+  const [boardContents, setBoardContents] = useState([]);
+  const [inputs, setInputs] = useState({
+    id: "",
+    pw: "",
+  });
+
+  const {id, pw} = inputs;
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -65,10 +69,11 @@ function Profile(){
         }
     }
     
-   function Check(e){
+   function CheckIDPW(){
         axios.get('/api/fb/documents', {
             params: {
-                tag: props.tag
+                id: id,
+                pw: pw
             }
         })
         .then(response => {

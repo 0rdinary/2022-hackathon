@@ -34,6 +34,7 @@
 
 .navbar_div {
     margin: 0 auto;
+    transform: translateX(-50%);
 }
 
 @keyframes App-logo-spin {

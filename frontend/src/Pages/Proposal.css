@@ -71,16 +71,31 @@ textarea:focus, input:focus{
     border-color: #e8e8e8;
     border-width: 0 1px;
     width:100%;
+    margin-top: 3rem;
 }
 
 .proposal_input_head{
-    outline: none;
-    border: none;
-    font-size: xx-large;
+    font-size: large;
+    width: 800px;
+    height: 30px;
 }
 
 .proposal_input_body{
-    outline: none;
-    border: none;
-    font-size: x-large;
+    font-size: large;
+    width: 800px;
+    height:1000px;
+}
+
+.proposal_input_name{
+    width: 1000px;
+    font-weight: bold;
+}
+
+.proposal_input_content{
+    margin-top: 2rem;
+}
+
+.proposal_input_btn{
+    width: 120px;
+    height: 40px;
 }

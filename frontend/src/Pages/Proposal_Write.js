@@ -1,8 +1,12 @@
-import { AlignHorizontalLeft, FiberManualRecord, ThumbDown, ThumbUp } from "@mui/icons-material";
+import { AlignHorizontalLeft, FiberManualRecord, Margin, ThumbDown, ThumbUp } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import React, {useState} from "react";
 import Grid from '@mui/material/Grid';
 import "./Proposal.css"
+import { Button, MenuItem } from "@mui/material";
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function ProposalWrite(){
     
@@ -41,16 +45,41 @@ function ProposalWrite(){
     <div>
         <Box display="table-row-group" justifyContent="flex-start" sx={{width:1000}} className="proposal_input_box">
             <div>
-                <input type="text" className="proposal_input_head" placeholder="제목" id="proposalHeadline" value={proposalHeadline} onChange={onChange}/>
+                <text className="proposal_input_name">제안 제목</text>
                 <br/>
+                <input type="text" className="proposal_input_head" placeholder="제목" id="proposalHeadline" value={proposalHeadline} onChange={onChange}/>
             </div>
-            <hr />
-            <div>
+            <div className="proposal_input_content">
+                <text className="proposal_input_name">카테고리</text>
+                <br/>
+                <FormControl sx={{width:500}} size="small">
+                    <InputLabel id="select-tag">카테고리</InputLabel>
+                    <Select
+                        name="select-tag"
+                        id="tag"
+                        value={tag}
+                        label="태그"
+                        onChange={onChange}
+                    >
+                        {board_name.map((text, index) => (
+                        <MenuItem value={board_name[index]}>{text}</MenuItem>))}
+                    </Select>
+                </FormControl>
+            </div>
+            <div className="proposal_input_content">
+                <text className="proposal_input_name">제안 내용</text>
+                <br/>
                 <input type="text" className="proposal_input_body" placeholder="내용" id="proposalContent" value={proposalContent} onChange={onChange}/>
             </div>
+            <div>
+            <Button variant="contained" className="proposal_input_btn" style={{background:'#D91438'}}>작성</Button>
+            <Button variant="outlined" className="proposal_input_btn" style={{borderColor:'#D91438'}}><text style={{color:"#D91438"}}>목록</text></Button>
+            </div>
+                
             <br />
             <p>제목 : {proposalHeadline}</p>
             <p>내용 : {proposalContent}</p>
+            <p>카테고리 : {tag}</p>
         </Box>
     </div>
     )  

@@ -1,8 +1,26 @@
 import React from "react";
 import Box from '@mui/material/Box';
+import { SvgIcon } from "@mui/material";
 import './Home.css'
 import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
+import { Link } from "react-router-dom";
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import {
+    ContentPaste,
+    DepartureBoard,
+    Diversity1,
+    FamilyRestroom,
+    FireTruck,
+    Foundation,
+    Landscape,
+    MedicalInformation,
+    Paid,
+    Piano,
+    ReceiptLong
+} from "@mui/icons-material";
 
 function createData(proposalHeadline, tag, agree, disagree) {
     return {proposalHeadline, tag, agree, disagree};
@@ -11,6 +29,19 @@ function createData(proposalHeadline, tag, agree, disagree) {
   const MainProposal = 
     createData('싱싱한 대구 팝니다','수산', 15, 15);
 function Home(){
+    var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
+                 "건강/보건/위생", "산업/경제", "환경", "소방/안전",
+                 "도시주택/건설", "행정/재정/세정", "자유게시판"]
+    var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
+                "environment", "safety", "construction", "administration"];
+    
+    const icons = [Piano, DepartureBoard, Diversity1, 
+        FamilyRestroom, MedicalInformation, Paid, Landscape, 
+        FireTruck, Foundation, ReceiptLong, ContentPaste];
+              
+    const icons_color = ["purple", 'DeepSkyBlue', 'green',
+        'purple', 'red', 'gold', 'green', 'red',
+        'DeepSkyBlue', 'gold', 'purple'];
 
     return(
         <div className="home">
@@ -32,17 +63,45 @@ function Home(){
                 </Grid>
             </Box>
             <div>
-                    <h2>카테고리 별</h2>
+                <h2>카테고리 별</h2>
+                    <Grid container direction="column" alignItems="center">
+                        <Grid container direction="row" alignItems="center">
+                            {board_name.slice(0,5).map((text, index) => (
+                                <Grid item xs>
+                                <Box sx={{width:50, height:50, border:1}}>
+                                <Link to={"/board"}
+                                    state={{ name: board_name[index],
+                                    tag: tag_name[index]
+                                }}>
+                                <ListItemButton >
+                                    <ListItemIcon>
+                                        <SvgIcon component={icons[index]} style={{ color: icons_color[index] }} />
+                                    </ListItemIcon>
+                                </ListItemButton>
+                                </Link>
+                                </Box>
+                            </Grid>
+                            ))}
+                        </Grid>
                     <Grid container direction="row" alignItems="center">
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
-                    <Grid item xs><Box sx={{width:50, height:50, border:1}}></Box></Grid>
+                        {board_name.slice(5,10).map((text, index) => (
+                            <Grid item xs>
+                            <Box sx={{width:50, height:50, border:1}}>
+                            <Link to={"/board"}
+                                state={{ name: board_name[index+5],
+                                tag: tag_name[index+5]
+                            }}>
+                                <ListItemButton >
+                                    <ListItemIcon>
+                                        <SvgIcon component={icons[index+5]} style={{ color: icons_color[index+5] }} />
+                                    </ListItemIcon>
+                                    
+                                </ListItemButton>
+                            </Link>
+                            </Box>
+                        </Grid>
+                        ))}
+                    </Grid>
                     </Grid>
                 </div>
             </div>

@@ -25,19 +25,11 @@ public class FirebaseService {
 
     public String insertDocument(HashMap<String, Object> param) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
-        Timestamp timestamp;
         Map<String, Object> docData = new HashMap<>();
         for (String key: param.keySet()) {
-            if(key=="date")
-            {
-                timestamp = Timestamp.now();
-                docData.put(key, timestamp);
-            }
-            else
-            {
-                docData.put(key, param.get(key));
-            }
+            docData.put(key, param.get(key));
         }
+        docData.put("date", Timestamp.now());
         docData.put("up", 0);
         docData.put("down", 0);
         ApiFuture<DocumentReference> apiFuture = db.collection(COLLECTION_DOCUMENT).add(docData);
@@ -77,7 +69,7 @@ public class FirebaseService {
 
     public String selectComment(String id) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).collection(COLLECTION_COMLIST).get();
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).collection(COLLECTION_COMLIST).orderBy("date", Query.Direction.DESCENDING).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
 
         ArrayList<Comment> commentList = new ArrayList<>();
@@ -92,7 +84,7 @@ public class FirebaseService {
 
     public String selectDocumentsByTag(String tag) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("tag",tag).get();
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("tag",tag).orderBy("date", Query.Direction.DESCENDING).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
 
         List<DocList> docList = new ArrayList<>();
@@ -140,7 +132,7 @@ public class FirebaseService {
         DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(param.get("id").toString());
         ApiFuture<WriteResult> future = docRef.update("content", param.get("content"));
         future.get();
-        future = docRef.update("date",param.get("date"));
+        future = docRef.update("date",Timestamp.now());
         return future.get().toString();
     }
     public String selectDocumentsByWriter(String writer) throws Exception {
@@ -172,5 +164,21 @@ public class FirebaseService {
         }
         ans += objectMapper.writeValueAsString(docList) + "}";
         return ans;
+    }
+
+    public String insertComment(HashMap<String, Object> param) throws Exception{
+        Firestore db = FirestoreClient.getFirestore();
+        String docId = param.get("id").toString();
+        Map<String, Object> comment = new HashMap<>();
+        for (String key: param.keySet()) {
+            if(key!="id")
+            {
+                comment.put(key, param.get(key));
+            }
+        }
+        comment.put("date", Timestamp.now());
+        ApiFuture<DocumentReference> apiFuture = db.collection(COLLECTION_DOCUMENT).document(docId).collection(COLLECTION_COMLIST).add(comment);
+
+        return apiFuture.get().getId();
     }
 }

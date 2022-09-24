@@ -30,7 +30,12 @@ public class FirebaseController {
 
         return firebaseService.insertDocument(param);
     }
+    @PostMapping("/insertComment")
+    public String commentRequest(@RequestBody HashMap<String, Object> param) throws Exception{
+        System.out.println("param : " + param);
 
+        return firebaseService.insertComment(param);
+    }
     @GetMapping("/comment")
     public String getDocComment(@RequestParam String id) throws Exception{
         return firebaseService.selectComment(id);

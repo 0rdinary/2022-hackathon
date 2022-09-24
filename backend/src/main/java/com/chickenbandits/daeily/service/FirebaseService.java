@@ -59,6 +59,8 @@ public class FirebaseService {
         }
         return commentList;
     }
+
+    // TODO: 대체 예정
     public List<DocList> selectDocList() throws Exception{
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).get();
@@ -70,6 +72,7 @@ public class FirebaseService {
         return docList;
     }
 
+    // TODO: 대체 예정
     public List<Document> selectDocumentByTag(String tag) throws Exception {
         List<DocList> docList = selectDocList();
         List<Document> documents = new ArrayList<>();
@@ -84,5 +87,16 @@ public class FirebaseService {
             }
         }
         return documents;
+    }
+    public List<DocList> selectDocuments(String tag) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        // TODO: DB의 DocList에 Tag 정보 추가
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("tag",tag).get();
+        List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
+        List<DocList> docList = new ArrayList<>();
+        for (DocumentSnapshot document : documents) {
+            docList.add(document.toObject(DocList.class));
+        }
+        return docList;
     }
 }

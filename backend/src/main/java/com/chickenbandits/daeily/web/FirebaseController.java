@@ -31,13 +31,17 @@ public class FirebaseController {
         return firebaseService.selectComment(id);
     }
 
-    @GetMapping("/doclist")
-    public List<DocList> getDocList() throws Exception {
-        return firebaseService.selectDocList();
-    }
-
+    // TODO: 주석 삭제 예정
+//    @GetMapping("/doclist")
+//    public List<DocList> getDocList() throws Exception {
+//        return firebaseService.selectDocList();
+//    }
+//    @GetMapping("/documents")
+//    public List<Document> getAllDocuments(@RequestParam String tag) throws Exception {
+//        return firebaseService.selectDocumentByTag(tag);
+//    }
     @GetMapping("/documents")
-    public List<Document> getAllDocuments(@RequestParam String tag) throws Exception {
-        return firebaseService.selectDocumentByTag(tag);
+    public List<DocList> getAllDocuments(@RequestParam String tag) throws Exception {
+        return firebaseService.selectDocuments(tag);
     }
 }

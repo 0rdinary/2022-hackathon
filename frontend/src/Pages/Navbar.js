@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { Link } from "react-router-dom";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import Icon from "../Images/Daeily_Icon.png";
+import Icon from "../Images/Daeily_logo.png";
 import InputBase from '@mui/material/InputBase';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -75,8 +75,8 @@ var directionLink = ["/board", "/proposal", "/profile", "/proposal/write"]
 var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
                  "건강/보건/위생", "산업/경제", "환경", "소방/안전",
                  "도시주택/건설", "행정/재정/세정", "자유게시판"]
-                 var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
-                                 "environment", "safety", "construction", "administration"];
+var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
+                "environment", "safety", "construction", "administration"];
 
 function Navbar(){
     const theme = useTheme();
@@ -92,10 +92,10 @@ function Navbar(){
 
     return (
       <Box class="Navbar" sx={{ display: 'flex'}}>
-        <AppBar elevation={1} position="static" open={open} style={{ background: '#D91438'}}>
+        <AppBar elevation={1} position="static" open={open} style={{ background: '#808080'}}>
           <Toolbar class="Header">
             <Link to= "/">
-              <img src={Icon}/>
+              <img src={Icon} width="123" height="73"/>
             </Link>
             <IconButton
               color="inherit"
@@ -128,7 +128,10 @@ function Navbar(){
             <List>
               {board_name.map((text, index) => (
                 <ListItem key={text} disablePadding>
-                  <Link to={directionLink[index]}>
+                  <Link to={"/board"}
+                        state={{ name: board_name[index],
+                                 tag: tag_name[index]
+                        }}>
                     <ListItemButton>
                       <ListItemIcon>
                         <InboxIcon/>

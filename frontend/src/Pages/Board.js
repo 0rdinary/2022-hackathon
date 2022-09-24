@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,9 +12,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useLocation } from 'react-router-dom';
 import './Board.css'
+import { create } from "@mui/material/styles/createTransitions";
 
 const columns = [
-    { id: 'num', label: '번호' },
     { id: 'title', label: '제목'},
     { id: 'writer', label: '작성자'},
     { id: 'date', label: '작성일자'},
@@ -20,14 +22,17 @@ const columns = [
     { id: 'down', label: '싫어요'},
   ];
 
-function createData(num, proposalHeadline, tag, writer, date, agree, disagree) {
-  return { num, proposalHeadline, tag, writer, date, agree, disagree };
-}
+function createData(content) {
+    var title = content['title'];
+    var writer = content['writer'];
+    var date = content['date'];
+    var up = content['up'];
+    var down = content['down'];
 
-const rows = [
-  createData('1', '싱싱한 대구 팝니다', '수산', '바른횟집', '22/09/22', 15, 15),
-  createData('2', '홍콩반점대구튀김도둑 잡습니다', '범죄', '홍콩반점', '22/09/11', 1, 1557)
-];
+    var rtv = { title, writer, date, up, down}
+
+    return rtv;
+}
 
 function Board() {
     const location = useLocation();
@@ -35,6 +40,8 @@ function Board() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [documents, setDocuments] = useState();
+
+    var board_contents = []
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -44,6 +51,13 @@ function Board() {
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
+
+    const makeBoardContents = (contents) => {
+        var contents_size = contents.length;
+        for (var i = 0; i < contents_size; i++) {
+          board_contents.push(createData(contents[i]));
+        }
+    }
     
    useEffect(() => {
         axios.get('/api/fb/documents', {
@@ -53,9 +67,7 @@ function Board() {
         })
         .then(response => {
           setDocuments(response.data);
-          console.log(location);
-          console.log(props.tag);
-          console.log(documents);
+          makeBoardContents(documents);
         })
         .catch(error => console.log(error));
     }, [])
@@ -83,7 +95,7 @@ function Board() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows
+                            {board_contents
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((row) => {
                                 return (
@@ -107,13 +119,21 @@ function Board() {
                 <TablePagination
                   rowsPerPageOptions={[10, 25, 100]}
                   component="div"
-                  count={rows.length}
+                  count={board_contents.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
+            <div className="button_div">
+                <Link to="/doc/write"
+                      state={{
+                        tag: props.tag
+                      }}>
+                    <Button variant="contained">작성하기</Button>
+                </Link>
+            </div>
         </div>
     </div>
   );

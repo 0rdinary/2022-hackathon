@@ -2,6 +2,12 @@
     padding-left: 0.5rem;
 }
 
+.button_div {
+    margin-top : 2vh;
+    padding-right: 2vw;
+    text-align: right;
+}
+
 .BoardTable{
     padding-left: 0.5rem;
 }

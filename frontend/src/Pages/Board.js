@@ -19,7 +19,6 @@ const columns = [
     { id: 'writer', label: '작성자'},
     { id: 'date', label: '작성일자'},
     { id: 'up', label: '좋아요'},
-    { id: 'down', label: '싫어요'},
   ];
 
 function createData(content) {
@@ -27,11 +26,8 @@ function createData(content) {
     var writer = content['writer'];
     var date = content['date'];
     var up = content['up'];
-    var down = content['down'];
 
-    var rtv = { title, writer, date, up, down}
-
-    return rtv;
+    return {title, writer, date, up};
 }
 
 function Board() {
@@ -40,8 +36,7 @@ function Board() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [documents, setDocuments] = useState();
-
-    var board_contents = []
+    const [boardContents, setBoardContents] = useState([]);
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -55,9 +50,10 @@ function Board() {
     const makeBoardContents = (contents) => {
         var contents_size = contents.length;
         for (var i = 0; i < contents_size; i++) {
-          board_contents.push(createData(contents[i]));
+          const newContent = createData(contents[i]);
+          console.log(newContent);
+          setBoardContents(boardContents => [newContent, ...boardContents]);
         }
-        console.log(board_contents);
     }
     
    useEffect(() => {
@@ -67,8 +63,10 @@ function Board() {
             }
         })
         .then(response => {
-          setDocuments(response.data);
-          makeBoardContents(documents);
+          setDocuments(documents);
+          // console.log(response.data.list)
+          // console.log(documents);
+          makeBoardContents(response.data.list);
         })
         .catch(error => console.log(error));
     }, [])
@@ -102,15 +100,15 @@ function Board() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {board_contents
+                            {boardContents
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                              .map((row) => {
+                              .map((row, index) => {
                                 return (
-                                  <TableRow hover role="checkbox" tabIndex={-1} key={row.num}>
-                                    {columns.map((column) => {
-                                      const value = row[column.id];
+                                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                    {columns.map((column, idx) => {
+                                      const value = row[idx];
                                       return (
-                                        <TableCell key={column.id} align={column.align}>
+                                        <TableCell key={idx} align={column.align}>
                                           {column.format && typeof value === 'number'
                                             ? column.format(value)
                                             : value}
@@ -126,7 +124,7 @@ function Board() {
                 <TablePagination
                   rowsPerPageOptions={[10, 25, 100]}
                   component="div"
-                  count={board_contents.length}
+                  count={boardContents.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}

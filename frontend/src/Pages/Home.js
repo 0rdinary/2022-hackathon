@@ -2,7 +2,7 @@ import React from "react";
 import Box from '@mui/material/Box';
 import { SvgIcon } from "@mui/material";
 import './Home.css'
-import { ThumbDown, ThumbUp } from "@mui/icons-material";
+import { DonutLarge, ThumbDown, ThumbUp } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
 import ListItemButton from '@mui/material/ListItemButton';
@@ -31,7 +31,7 @@ function createData(proposalHeadline, tag, agree, disagree) {
 function Home(){
     var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
                  "건강/보건/위생", "산업/경제", "환경", "소방/안전",
-                 "도시주택/건설", "행정/재정/세정", "자유게시판"]
+                 "도시주택/건설", "행정/재정/세정"]
     var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
                 "environment", "safety", "construction", "administration"];
     
@@ -64,41 +64,34 @@ function Home(){
             </Box>
             <div>
                 <h2>카테고리 별</h2>
-                    <Grid container direction="column" alignItems="center">
+                    <Grid container direction="column" alignItems="center" className="category_grid">
                         <Grid container direction="row" alignItems="center">
                             {board_name.slice(0,5).map((text, index) => (
                                 <Grid item xs>
-                                <Box sx={{width:50, height:50, border:1}}>
-                                <Link to={"/board"}
+                                    <Link to={"/board"}
                                     state={{ name: board_name[index],
                                     tag: tag_name[index]
                                 }}>
-                                <ListItemButton >
-                                    <ListItemIcon>
-                                        <SvgIcon component={icons[index]} style={{ color: icons_color[index] }} />
-                                    </ListItemIcon>
-                                </ListItemButton>
-                                </Link>
+                                <Box sx={{width:100, height:100, border:1}}>
+                                    <SvgIcon component={icons[index]} style={{ color: icons_color[index] }} />
+                                    <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
                                 </Box>
+                                </Link>
                             </Grid>
                             ))}
                         </Grid>
-                    <Grid container direction="row" alignItems="center">
+                    <Grid container direction="row" alignItems="center" className="category_grid">
                         {board_name.slice(5,10).map((text, index) => (
                             <Grid item xs>
-                            <Box sx={{width:50, height:50, border:1}}>
-                            <Link to={"/board"}
+                                <Link to={"/board"}
                                 state={{ name: board_name[index+5],
                                 tag: tag_name[index+5]
                             }}>
-                                <ListItemButton >
-                                    <ListItemIcon>
-                                        <SvgIcon component={icons[index+5]} style={{ color: icons_color[index+5] }} />
-                                    </ListItemIcon>
-                                    
-                                </ListItemButton>
-                            </Link>
+                            <Box sx={{width:100, height:100, border:1}}>
+                                <SvgIcon component={icons[index + 5]} style={{ color: icons_color[index + 5] }} />
+                                <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
                             </Box>
+                            </Link>
                         </Grid>
                         ))}
                     </Grid>

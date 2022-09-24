@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Grid} from "@mui/material";
+import { AppBar, Toolbar, IconButton, Grid, Menu, SvgIcon} from "@mui/material";
 import Box from '@mui/material/Box';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { Link } from "react-router-dom";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import Icon from "../Images/Daeily_logo.png";
+import DaeilyIcon from "../Images/Daeily_logo.png";
 import InputBase from '@mui/material/InputBase';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -20,6 +20,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import './Navbar.css';
+import { ContentPaste, DepartureBoard, Diversity1, FamilyRestroom, FireExtinguisher, Fireplace, FireTruck, Foundation, Landscape, MedicalInformation, Paid, Piano, ReceiptLong } from "@mui/icons-material";
+import Icon from '@mui/material/Icon';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -80,52 +82,74 @@ var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy
 
 function Navbar(){
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+      console.log(event.currentTarget.position);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    }
-
-    const handleDrawerClose = () => {
-      setOpen(false);
-    }
+    const icons = [Piano, DepartureBoard, Diversity1, 
+      FamilyRestroom, MedicalInformation, Paid, Landscape, 
+      FireTruck, Foundation, ReceiptLong, ContentPaste];
 
     return (
       <Box class="Navbar" sx={{ display: 'flex'}}>
         <AppBar elevation={1} position="static" open={open} style={{ background: '#808080'}}>
           <Toolbar class="Header">
             <Link to= "/">
-              <img src={Icon} width="123" height="73"/>
+              <img src={DaeilyIcon} width="123" height="73"/>
             </Link>
             <IconButton
               color="inherit"
-              aria-label="open drawer"
+              aria-label="open Menu"
               edge="end"
-              onClick={handleDrawerOpen}
-              sx={{ ...(open && { display: 'none' }) }}
+              onClick={handleClick}
+              sx={{ ...(open && { })}}
             >
               <MenuIcon />
             </IconButton>
           </Toolbar>
-          <Drawer
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: drawerWidth,
-              },
-            }}
-            variant="persistent"
-            anchor="right"
+          <Menu
+            anchorEl={anchorEl}
+            getContentAnchorEl={null}
+            id="account-menu"
             open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+            elevation: 0,
+            sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <DrawerHeader>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-              </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <List>
+        <List>
               {board_name.map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <Link to={"/board"}
@@ -134,7 +158,7 @@ function Navbar(){
                         }}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <InboxIcon/>
+                        <SvgIcon component={icons[index]} />
                       </ListItemIcon>
                       <ListItemText primary={text} />
                     </ListItemButton>
@@ -155,7 +179,8 @@ function Navbar(){
                 </ListItem>
               ))}
             </List>
-          </Drawer>
+      </Menu>
+
         </AppBar>
       </Box>
     )

@@ -41,4 +41,9 @@ public class FirebaseController {
     public String getAllDocuments(@RequestParam String tag) throws Exception {
         return firebaseService.selectDocuments(tag);
     }
+
+    @GetMapping("/vote")
+    public String vote(@RequestParam String id, @RequestParam String way) throws Exception {
+        return firebaseService.vote(id, way);
+    }
 }

@@ -95,4 +95,34 @@ public class FirebaseService {
         ans += objectMapper.writeValueAsString(docList) + "}";
         return ans;
     }
+
+    public String vote(String id, String way) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(id).get();
+        DocumentSnapshot documentSnapshot = apiFuture.get();
+        DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(id);
+
+        int up = (int)documentSnapshot.get("up");
+        int down = (int)documentSnapshot.get("down");
+        String listID = "";
+        if(way.equals("up")) {
+            up++;
+            ApiFuture<WriteResult> future = docRef.update("up", up);
+            ApiFuture<QuerySnapshot> apiFuture2 = db.collection(COLLECTION_DOCLIST).whereEqualTo("id", id).get();
+            List<QueryDocumentSnapshot> documents = apiFuture2.get().getDocuments();
+            for (DocumentSnapshot document : documents) {
+                listID = document.getId().toString();
+            }
+            docRef = db.collection(COLLECTION_DOCLIST).document(listID);
+            future = docRef.update("up", up);
+            WriteResult result = future.get();
+            return result.toString();
+        }
+        else {
+            down++;
+            ApiFuture<WriteResult> future = docRef.update("down", down);
+            WriteResult result = future.get();
+            return result.toString();
+        }
+    }
 }

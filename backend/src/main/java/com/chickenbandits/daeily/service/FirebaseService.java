@@ -81,7 +81,7 @@ public class FirebaseService {
         return ans;
     }
 
-    public String selectDocuments(String tag) throws Exception {
+    public String selectDocumentsByTag(String tag) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("tag",tag).get();
         List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
@@ -124,5 +124,44 @@ public class FirebaseService {
             WriteResult result = future.get();
             return result.toString();
         }
+    }
+
+    public String editDocument(HashMap<String, Object> param) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(param.get("id").toString());
+        ApiFuture<WriteResult> future = docRef.update("content", param.get("content"));
+        future.get();
+        future = docRef.update("date",param.get("date"));
+        return future.get().toString();
+    }
+    public String selectDocumentsByWriter(String writer) throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).whereEqualTo("writer",writer).get();
+        List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
+
+        List<DocList> docList = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String ans = "{\"list\":";
+        for (DocumentSnapshot document : documents) {
+            docList.add(document.toObject(DocList.class));
+        }
+        ans += objectMapper.writeValueAsString(docList) + "}";
+        return ans;
+    }
+
+    public String selectTopDocuments() throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).whereEqualTo("isPublic", true).orderBy("up", Query.Direction.DESCENDING).limit(5).get();
+//        ApiFuture<QuerySnapshot> apiFuture = db.collection(COLLECTION_DOCLIST).orderBy("up", Query.Direction.DESCENDING).limit(5).get();
+        List<QueryDocumentSnapshot> documents = apiFuture.get().getDocuments();
+
+        List<DocList> docList = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String ans = "{\"list\":";
+        for (DocumentSnapshot document : documents) {
+            docList.add(document.toObject(DocList.class));
+        }
+        ans += objectMapper.writeValueAsString(docList) + "}";
+        return ans;
     }
 }

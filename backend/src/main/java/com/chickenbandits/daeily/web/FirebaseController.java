@@ -38,12 +38,26 @@ public class FirebaseController {
     }
 
     @GetMapping("/documents")
-    public String getAllDocuments(@RequestParam String tag) throws Exception {
-        return firebaseService.selectDocuments(tag);
+    public String getDocumentsByTag(@RequestParam String tag) throws Exception {
+        return firebaseService.selectDocumentsByTag(tag);
     }
 
     @GetMapping("/vote")
     public String vote(@RequestParam String id, @RequestParam String way) throws Exception {
         return firebaseService.vote(id, way);
+    }
+
+    @PostMapping("/edit")
+    public String editDocument(@RequestBody HashMap<String, Object> param) throws Exception{
+        System.out.println("param : " + param);
+        return firebaseService.editDocument(param);
+    }
+    @GetMapping("/user")
+    public String getDocumentsByWriter(@RequestParam String writer) throws Exception {
+        return firebaseService.selectDocumentsByWriter(writer);
+    }
+    @GetMapping("/top")
+    public String getTopDocuments() throws Exception {
+        return firebaseService.selectTopDocuments();
     }
 }

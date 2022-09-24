@@ -56,17 +56,16 @@ function Written(){
     }
     
   function CheckID(){
-    for (var i = 0; i < 2; i++) {
-      var tmp = {}
-      tmp['title'] = 'ABC'
-      tmp['date'] = '22/05/19'
-      tmp['up'] = 15
-      setDocuments(documents => [tmp, ...documents]);
-    }
-
-    axios.get('/api/fb/user?writer', {
+    // for (var i = 0; i < 2; i++) {
+    //   var tmp = {}
+    //   tmp['title'] = 'ABC'
+    //   tmp['date'] = '22/05/19'
+    //   tmp['up'] = 15
+    //   setDocuments(documents => [tmp, ...documents]);
+    // }
+    axios.get('/api/fb/user', {
       params: {
-        id: id
+        writer: id
       }
     })
     .then(response => {

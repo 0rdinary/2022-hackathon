@@ -14,8 +14,10 @@
 }
 
 .category_box{
-    font-size: x-small;
     vertical-align: middle;
+    align-items: center;
+    margin:auto;
+    padding-top: 33px;
 }
 
 .category_grid{

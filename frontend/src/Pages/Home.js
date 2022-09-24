@@ -72,10 +72,10 @@ function Home(){
                                     state={{ name: board_name[index],
                                     tag: tag_name[index]
                                 }}>
-                                <Box sx={{width:100, height:100, border:1}}>
-                                    <SvgIcon component={icons[index]} style={{ color: icons_color[index] }} />
-                                    <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
+                                <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
+                                    <SvgIcon component={icons[index]} style={{fontSize:'40px', color: icons_color[index] }} />
                                 </Box>
+                                <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
                                 </Link>
                             </Grid>
                             ))}
@@ -87,10 +87,10 @@ function Home(){
                                 state={{ name: board_name[index+5],
                                 tag: tag_name[index+5]
                             }}>
-                            <Box sx={{width:100, height:100, border:1}}>
-                                <SvgIcon component={icons[index + 5]} style={{ color: icons_color[index + 5] }} />
-                                <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px'}} />
+                            <Box sx={{width:99, height:66, borderRadius: '50%', backgroundColor:'#F6F6F6'}} className="category_box">
+                                <SvgIcon component={icons[index + 5]} style={{fontSize:'40px', color: icons_color[index + 5] }} />
                             </Box>
+                            <ListItemText primary={text} primaryTypographyProps={{fontSize: '12px', fontWeight:'500'}} />
                             </Link>
                         </Grid>
                         ))}

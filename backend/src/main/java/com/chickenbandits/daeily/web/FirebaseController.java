@@ -33,7 +33,7 @@ public class FirebaseController {
     }
 
     @GetMapping("/comment")
-    public ArrayList<Comment> getDocComment(@RequestParam String id) throws Exception{
+    public String getDocComment(@RequestParam String id) throws Exception{
         return firebaseService.selectComment(id);
     }
 

@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import Navbar from "./Pages/Navbar";
 import Board from "./Pages/Board";
 import Proposal from "./Pages/Proposal";
-import Profile from './Pages/Profile';
+import Written from './Pages/Written';
 import ProposalWrite from './Pages/Proposal_Write';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                     <Route path="/" element={<Home/>} />
                     <Route path="/board" element={<Board/>}/>
                     <Route path="/proposal" element={<Proposal/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/written" element={<Written/>}/>
                     <Route path="/proposal/write" element={<ProposalWrite/>}/>
                     <Route path="/doc/write" element={<DocWrite/>}/>
                     <Route path="/doc/view" />

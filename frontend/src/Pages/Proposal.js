@@ -46,7 +46,7 @@ function Proposal(){
                          justifyContent:"center", alignItems:"center", border: '1px grey'}}>
                     <Grid container direction="row" alignItems="center" className="box_inside">
                         <Grid item xs>
-                        <text className="box_text_category">문제 분류</text>
+                        <text className="box_text_category">카테고리</text>
                     <text className="box_text"> {Data.tag}</text>
                         </Grid>
                         <Grid item xs>

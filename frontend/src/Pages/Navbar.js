@@ -21,6 +21,7 @@ import { styled, useTheme, alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import './Navbar.css';
 import {
+  AccountCircle,
     Article,
     ContentPaste,
     DepartureBoard,
@@ -189,16 +190,18 @@ function Navbar(){
             </List>
             <Divider />
             <List>
-              {['내정보'].map((text, index) => (
+            <Link to={"/written"}>
+              {['작성한 글'].map((text, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton>
                     <ListItemIcon>
-                      <InboxIcon />
+                      <AccountCircle />
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItemButton>
                 </ListItem>
               ))}
+              </Link>
             </List>
       </Menu>
 

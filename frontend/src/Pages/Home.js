@@ -5,8 +5,6 @@ import './Home.css'
 import { DonutLarge, ThumbDown, ThumbUp } from "@mui/icons-material";
 import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import {
     ContentPaste,

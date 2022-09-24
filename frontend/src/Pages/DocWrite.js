@@ -61,20 +61,23 @@ function DocWrite() {
 
     return (
         <div className="write_div">
-            <Select sx={{mr: '1.6%', width: '31%'}}
-                labelId="id-simple-select-label"
-                id="tag-simple-select"
-                value={doc.tag}
-                label="카테고리"
-                name='tag'
-                onChange={docChange}
-            >
-                {board_name.map((name, index) => {
-                    return (
-                        <MenuItem value={tag_name[index]}>{name}</MenuItem>
-                    )
-                })}
-            </Select>
+            <FormControl sx={{mr: '1.6%', width: '31%'}}>
+                <InputLabel id="id-simple-select-label">카테고리</InputLabel>
+                <Select
+                    labelId="id-simple-select-label"
+                    id="tag-simple-select"
+                    defaultValue={doc.tag}
+                    label="카테고리"
+                    name='tag'
+                    onChange={docChange}
+                >
+                    {board_name.map((name, index) => {
+                        return (
+                            <MenuItem value={tag_name[index]}>{name}</MenuItem>
+                        )
+                    })}
+                </Select>
+            </FormControl>
             <TextField sx={{mr:'1.6%', width: '31%'}}
                 required
                 id="outlined-required"
@@ -100,7 +103,7 @@ function DocWrite() {
                 onChange={docChange}
                 variant="outlined"
             />
-            <div clasName="editor_div">
+            <div className="editor_div">
                 <CKEditor
                     editor={ ClassicEditor }
                     data=""

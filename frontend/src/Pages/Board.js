@@ -65,7 +65,7 @@ function Board() {
               tmp['id'] = d[i]['id'];
               tmp['title'] = d[i]['title'];
               tmp['writer'] = d[i]['writer'];
-              tmp['date'] = day.toLocaleDateString('ko-KR');;
+              tmp['date'] = day.toLocaleDateString('ko-KR');
               tmp['up'] = d[i]['up'];
               list.push(tmp);
           }

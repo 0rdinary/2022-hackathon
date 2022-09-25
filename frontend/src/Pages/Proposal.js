@@ -1,33 +1,65 @@
-import React, { useEffect } from "react";
-import { FiberManualRecord, ThumbDown, ThumbUp } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
+import { ThumbDown, ThumbUp } from "@mui/icons-material";
 import axios from 'axios';
 import { Box } from "@mui/system";
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
 import "./Proposal.css"
+ 
+var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
+                  "건강/보건/위생", "산업/경제", "환경", "소방/안전",
+                  "도시주택/건설", "행정/재정/세정", "자유게시판"]
+var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
+                "environment", "safety", "construction", "administration"];
 
-const columns = [
-    { id: 'num', label: '번호' },
-    { id: 'status', label: '상태'},
-    { id: 'proposalHeadline', label: '제안 제목'},
-    { id: 'proposalContent', label: '제안 내용'},
-    { id: 'tag', label: '태그'},
-    { id: 'writer', label: '작성자'},
-    { id: 'date', label: '작성일자'},
-    { id: 'agree', label: '찬성'},
-    { id: 'disagree', label: '반대'},
-  ];
+var dic = {};
+tag_name.forEach((key, i) => dic[key] = board_name[i]);
 
-  function createData(num, status,proposalHeadline, proposalContent,tag, writer, date, agree, disagree) {
-    return { num, status,proposalHeadline, proposalContent,tag, writer, date, agree, disagree };
-  }
-  
-  const Data = 
-    createData('1', '제안 진행중','싱싱한 대구 팝니다', '대구 1마리 32800\n대구 2마리 45800\n대구 100마리 328000','수산', '바른횟집', '22/09/22', 15, 15);
-  
-
-function Proposal(){
+function Proposal() {
+    var day = '';
     const { id } = useParams();
+    const [document, setDocument] = useState({
+        title: '',
+        content: '',
+        up: 0,
+        down: 0,
+        writer: '',
+        tag: 'culture',
+        date: ''
+    });
+    const [comment, setComment] = useState({
+        id: id,
+        writer: '',
+        content: ''
+    })
+    const [comments, setComments] = useState([]);
+
+    const submitComment = () => {
+        axios.post('/api/fb/insertComment', {
+            "id": id,
+            "writer": comment.writer,
+            "content": comment.content
+        },{
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then((response)=> {
+            alert("등록 완료");
+            console.log(response.data);
+            setComments(comments => [...comments, comment]);
+        })
+    };
+
+    const commentChange = (event) => {
+        const { name, value } = event.target;
+
+        setDoc({
+            ...comment,
+            [name]: value
+        })
+    }
 
     useEffect(() => {
         axios.get('/api/fb/doc', {
@@ -36,60 +68,92 @@ function Proposal(){
             }
         })
         .then(response => {
-          console.log(response.data);
+          setDocument(response.data.content);
+        })
+        .catch(error => console.log(error));
+
+        axios.get('/api/fb/comment', {
+            params: {
+                id: id
+            }
+        })
+        .then(response => {
+            setComments(response.data.content);
         })
         .catch(error => console.log(error));
     }, [])
 
+    useEffect(() => {
+        console.log(document);
+        if (document['date'] !== '') {
+            day = new Date(document['date']['seconds']*1000);
+            day = day.toLocaleDateString('ko-KR');
+        }
+    }, [document]);
+
+    useEffect(() => {
+        console.log(comments);
+    }, [comments]);
+
     return(
     <div className="proposal">
         <Box sx={{width:'100%'}}>
-        <div className="proposal_head">
-            <div>
-                <h3 className="proposalStatus">- {Data.status} -</h3>
+            <div className="proposal_head">
+                <div>
+                    <h3 className="proposalStatus">- {"제안 진행중"} -</h3>
+                </div>
+                <div>
+                    <h1>{document.title}</h1>
+                    <div className="box_div">
+                        <Box component="span"
+                            sx={{width:1000, height:50, backgroundColor: '#183459',
+                                justifyContent:"center", alignItems:"center", border: '1px grey'}}>
+                            <Grid container direction="row" alignItems="center" className="box_inside">
+                                <Grid item xs>
+                                <text className="box_text_category">카테고리</text>
+                            <text className="box_text"> {dic[document.tag]}</text>
+                                </Grid>
+                                <Grid item xs>
+                                <text className="box_text_category">작성자</text>
+                                <text className="box_text">  {document.writer}</text>
+                                </Grid>
+                                <Grid item xs>
+                                <text className="box_text_category">작성일자</text>
+                                <text className="box_text">  {day}</text>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </div>
+                    <div dangerouslySetInnerHTML={{__html: document.content}}>
+                    </div>
+                </div>
+                <div className="thumbs">
+                    <ThumbUp/> <text className="thumbs_text">{document.up}  </text>
+                    <text>  |  </text>
+                    <ThumbDown/> <text className="thumbs_text">{document.down}</text>
+                </div>
+                <div>
+                    <TextField sx={{width: '15%'}}
+                      id="outlined-basic" label="닉네임" variant="outlined"
+                      name='writer'
+                      onChange={commentChange}
+                    />
+                    <TextField sx={{width: '75%'}}
+                      id="outlined-basic" label="댓글" variant="outlined"
+                      name='content'
+                      onChange={commentChange}
+                    />
+                    <Button 
+                      variant="contained"
+                      onClick={submitComment}
+                    >작성</Button>
+                </div>
+                {/* <div>
+                    {comments.map(({writer, content}) => (
+                        {writer}{content}
+                    ))}
+                </div> */}
             </div>
-            <div>
-                <h1>{Data.proposalHeadline}</h1>
-            </div>
-            <div className="thumbs">
-                <ThumbUp/> <text className="thumbs_text">{Data.agree}  </text>
-                <text>  |  </text>
-                <ThumbDown/> <text className="thumbs_text">{Data.disagree}</text>
-            </div>
-            <div className="box_div">
-                <Box component="span"
-                    sx={{width:1000, height:50, backgroundColor: '#183459',
-                         justifyContent:"center", alignItems:"center", border: '1px grey'}}>
-                    <Grid container direction="row" alignItems="center" className="box_inside">
-                        <Grid item xs>
-                        <text className="box_text_category">카테고리</text>
-                    <text className="box_text"> {Data.tag}</text>
-                        </Grid>
-                        <Grid item xs>
-                        <text className="box_text_category">작성자</text>
-                        <text className="box_text">  {Data.writer}</text>
-                        </Grid>
-                        <Grid item xs>
-                        <text className="box_text_category">작성일자</text>
-                        <text className="box_text">  {Data.date}</text>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </div>
-        </div>
-        <div className="proposal_body">
-            <div>
-                <h2>제안 내용</h2>
-            </div>
-            <div>
-            <hr className="line"/>
-            </div>
-            <div>
-                <text className="proposalContent">
-                {Data.proposalContent}
-                </text>
-            </div>
-        </div>
         </Box>
     </div>
     )  

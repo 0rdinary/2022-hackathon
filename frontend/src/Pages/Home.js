@@ -75,7 +75,7 @@ function Home(){
             // </Grid>
             <Grid sx={{width:'100%'}}>
                 <Grid item xs>
-                    <text className="mainbox_tag">- dic[{props.item.tag}] -</text>
+                    <text className="mainbox_tag">- {dic[props.item.tag]} -</text>
                 </Grid>
                 <Grid item xs>
                     <Link to={'/doc/view/'+props.item.id} className="mainbox_head">{props.item.title}</Link>

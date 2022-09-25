@@ -127,13 +127,25 @@ public class FirebaseService {
         }
     }
 
-    public String editDocument(HashMap<String, Object> param) throws Exception {
+    public Boolean editDocument(HashMap<String, Object> param) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
-        DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(param.get("id").toString());
-        ApiFuture<WriteResult> future = docRef.update("content", param.get("content"));
-        future.get();
-        future = docRef.update("date",Timestamp.now());
-        return future.get().toString();
+        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_DOCUMENT).document(param.get("id").toString()).get();
+        DocumentSnapshot documentSnapshot = apiFuture.get();
+
+        Document document = documentSnapshot.toObject(Document.class);
+        if(document.getPassword().equals(param.get("password").toString()))
+        {
+            DocumentReference docRef = db.collection(COLLECTION_DOCUMENT).document(param.get("id").toString());
+            ApiFuture<WriteResult> future = docRef.update("content", param.get("content"));
+            future.get();
+            future = docRef.update("date",Timestamp.now());
+            future.get();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public String selectDocumentsByWriter(String writer) throws Exception {
         Firestore db = FirestoreClient.getFirestore();

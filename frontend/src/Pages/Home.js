@@ -43,9 +43,18 @@ function Home(){
         'purple', 'red', 'gold', 'green', 'red',
         'DeepSkyBlue', 'gold', 'purple'];
     
-        const location = useLocation();
-        const [documents, setDocuments] = useState([]);
-    
+    const location = useLocation();
+    const [documents, setDocuments] = useState([{tag:'a', title:'b', up: 5}, {tag:'c', title:'d', up: 10}, {tag:'d', title:'e', up: 15}]);
+    const [index, setIndex] = useState(0);
+
+    var obTimeOut;
+    var tempIndex = -1;
+    function MainProposalChangeON(){
+        tempIndex = (tempIndex + 1) % 3;
+        setIndex(tempIndex);
+        console.log(tempIndex);
+        obTimeOut = setTimeout(MainProposalChangeON, 5000);
+    }
         // useEffect(() => {
         //     axios.get('/api/fb/top')
         //     .then(response => {
@@ -70,22 +79,23 @@ function Home(){
     
         useEffect(() => {
           console.log(documents);
+          MainProposalChangeON();
         }, [documents]);
 
     return(
         <div className="home">
             <div>
                 <h2>주요 제안</h2>  
-                <Box sx={{width:600, height:300, border:1}}>
+                <Box sx={{width:'100%', height:300, border:1, borderRadius:'10%'}}>
                     <Grid container direction="column" alignItems="center">
                         <Grid item xs>
-                            <text className="mainbox_tag">- {} -</text>
+                            <text className="mainbox_tag">- {documents[index].tag} -</text>
                         </Grid>
                         <Grid item xs>
-                            <text className="mainbox_head">{}</text>
+                            <text className="mainbox_head">{documents[index].title}</text>
                         </Grid>
                         <Grid item xs>
-                            <ThumbUp/> <text>{}  </text>
+                            <ThumbUp/> <text>{documents[index].up}  </text>
                         </Grid>
                     </Grid>
                 </Box>

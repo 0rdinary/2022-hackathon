@@ -72,7 +72,7 @@ function Board() {
           setDocuments(list);
         })
         .catch(error => console.log(error));
-    }, [])
+    }, [props.tag])
 
     useEffect(() => {
       console.log(documents);

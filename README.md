@@ -1,66 +1,26 @@
-# 대일리 (Daeily)
-
-> (대)구의 (일)상을 (이)롭게
-
-<!--[![NPM Version][npm-image]][npm-url]-->
-<!--[![Build Status][travis-image]][travis-url]-->
-<!--[![Downloads Stats][npm-downloads]][npm-url]-->
-
-## 주요 기능
->* 대구시의 정책 홍보(팝업)
->* 대구시에 대한 건의 게시
->* 건의사항에 대한 주민여론을 확인하기 위한 투표 및 댓글작성
-
-## 활용 방법
+## 팀명
+> 치킨밴딧
+---
+## 제출 세션 및 주제
+> 특별 세션 - 주민참여 방법(수단) 부족
+---
+## 프로젝트 한 줄 설명
+> 대구시정에 대해 자유롭게 제언/토론 가능한 플랫폼
+---
+## 프로젝트 설명
+>* 지역 커뮤니티는 몇 존재하지만 정책적인 제언을 하기에는 어려움이 있습니다.
+>* 청와대 국민청원에서 영감을 얻어 ‘대구의 일상을 이롭게’ 라는 취지로 ‘대일리(Daeily)’라는 이름을 정하였습니다.
+>* 대구시에서 분류한 10가지 분야에 대해 요구, 제언을 업로드하고 다른 사람의 글에 좋아요/싫어요, 댓글로 의견을 표현 할 수 있습니다.
+---
+## 프로젝트에 활용한 기술
+![stack](./public/stack.png)
+> 1. 유저가 사이트에 접속시 보게 될 인터페이스는 React를 이용하여 구현하였습니다.
+> 2. Spring에서는 React로부터 요청받은 데이터를 Firebase의 NoSQL DB서비스 Firestore에 요청합니다. 유저가 임의로 DB를 변조 및 악용하지 못하도록 모든 DB에 대한 요청은 Spring을 통하여 진행하도록 구현하였습니다.
+> 3. Firebase의 Firestore를 활용하여 트랜잭션없이 실시간으로 DB가 갱신되고 최신의 정보를 제공할 수 있게 구현하였습니다.
+---
+## 시연영상
 임시  
 [![Video Label](http://img.youtube.com/vi/uLR1RNqJ1Mw/0.jpg)](https://youtu.be/uLR1RNqJ1Mw?t=0s)
 ---
-## 설치 및 실행 방법
-### Spring을 빌드
-backend 디렉토리로 이동 후 아래의 명령어로 Spring을 빌드합니다.
-```shell
-gradlew build --exclude-task test
-```
-그 후 Firebase에 연결하기 위한 비공개 키 json파일을 해당 디렉토리에 위치시킵니다.
-### Docker를 사용하여 실행
-다시 최상위 디렉토리로 이동한 후 아래의 명령을 실행시켜 서버를 구동합니다.
-```shell
- docker-compose up --build
-```
-명령 실행 시 Docker Hub로 부터 [0rdinary/daeily-front](https://hub.docker.com/r/0rdinary/daeily-front) 의 이미지를 내려받습니다.
-
 >**Note**
->약 500MB의 공간을 필요로 하므로 미리 확인하여 주십시오.
-해당 프로그램은 80번 PORT의 개방을 필요로 합니다.
----
-## 개발 환경 설정
->**Warning**
->해당 방법은 Spring과 React간의 통신이 제한됩니다.
->>**Note**
->>frontend/src/setupProxy.js의 target을 아래와 같이 수정할 시 통신가능  
->> ```target: 'http://localhost:8080'```
-
-backend 디렉토리에서 아래의 명령어로 Spring을 빌드할 수 있습니다.
-```shell
-gradlew build --exclude-task test
-```
-backend/build/libs 디렉토리로 이동하여 Firebase에 연결하기 위한 비공개 키 json파일을 해당 디렉토리에 위치시킵니다.   
-그리고 아래의 명령어로 Spring을 실행시킬 수 있습니다.
-```shell
-java -jar daeily-{version}-SNAPSHOT.jar
-```
-frontend 디렉토리에서 아래의 명령어로 React에 필요한 모듈을 설치할 수 있습니다.
-```shell
-npm install
-```
-이후 아래의 명령어로 React를 실행시킬 수 있습니다.
-```shell
-npm run start
-```
----
-## 팀 멤버
->### 치킨밴딧
->* 김경수 – [@Github](https://github.com/Roy052) – tdj04131@gmail.com  
->* 김현학 – [@Github](https://github.com/crihit) – rlagusgkr98@gmail.com  
->* 윤진 – [@Github](https://github.com/ideasidus) – ideasidus@gmail.com  
->* 정명원– [@Github](https://github.com/0rdinary) – ac980925@gmail.com  
+> Firebase SDK 키 파일이 Spring 실행파일과 함께 있어야 정상적으로 DB와 통신가능한 서비스입니다.

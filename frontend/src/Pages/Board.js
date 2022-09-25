@@ -48,6 +48,7 @@ function Board() {
         .then(response => {
           var d = response.data.list;
           var d_size = d.length;
+          var list = [];
           console.log(d);
           
           for (var i = 0; i < d_size; i++) {
@@ -59,8 +60,9 @@ function Board() {
               tmp['writer'] = d[i]['writer'];
               tmp['date'] = day.toLocaleDateString('ko-KR');;
               tmp['up'] = d[i]['up'];
-              setDocuments(documents => [tmp, ...documents]);
+              list.push(tmp);
           }
+          setDocuments(list);
         })
         .catch(error => console.log(error));
     }, [])

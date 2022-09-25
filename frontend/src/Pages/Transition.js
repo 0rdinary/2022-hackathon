@@ -25,7 +25,7 @@ function Transition(){
         <Route path="/written" element={<Written/>}/>
         <Route path="/proposal/write" element={<ProposalWrite/>}/>
         <Route path="/doc/write" element={<DocWrite/>}/>
-        <Route path="/doc/view" />
+        <Route path="/doc/view/:id" element={<Proposal/>}/>
         </Routes>
       </CSSTransition>
     </TransitionGroup>

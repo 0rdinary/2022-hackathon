@@ -1,7 +1,9 @@
 import { FiberManualRecord, ThumbDown, ThumbUp } from "@mui/icons-material";
+import axios from 'axios';
 import { Box } from "@mui/system";
 import React from "react";
 import Grid from '@mui/material/Grid';
+import { useLocation, useParams } from 'react-router-dom';
 import "./Proposal.css"
 
 const columns = [
@@ -25,9 +27,23 @@ const columns = [
   
 
 function Proposal(){
+    const { id } = useParams();
+
+    useEffect(() => {
+        axios.get('/api/fb/documents', {
+            params: {
+                tag: props.tag
+            }
+        })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => console.log(error));
+    }, [])
+
     return(
     <div className="proposal">
-        <Box sx={{width:1000}}>
+        <Box sx={{width:'100%'}}>
         <div className="proposal_head">
             <div>
                 <h3 className="proposalStatus">- {Data.status} -</h3>

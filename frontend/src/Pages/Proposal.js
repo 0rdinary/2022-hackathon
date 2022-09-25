@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import "./Proposal.css"
+import { createMuiTheme } from "@mui/material";
  
 var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
                   "건강/보건/위생", "산업/경제", "환경", "소방/안전",

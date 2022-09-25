@@ -6,6 +6,14 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 import "./Proposal.css"
  
 var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
@@ -125,7 +133,7 @@ function Proposal() {
                     <ThumbDown/> <text className="thumbs_text">{document.down}</text>
                 </div>
                 <div>
-                    <TextField sx={{width: '15%'}}
+                    <TextField sx={{width: '15%', height:'10%'}}
                       id="outlined-basic" label="닉네임" variant="outlined"
                       name='writer'
                       onChange={commentChange}
@@ -135,15 +143,32 @@ function Proposal() {
                       name='content'
                       onChange={commentChange}
                     />
-                    <Button 
+                    <Button sx={{height:'55px'}}
                       variant="contained"
                       onClick={submitComment}
                     >작성</Button>
                 </div>
                 <div>
-                    {comments.map(({writer, content, date}) => 
-                        <div>{writer}{content}</div>
-                    )}
+                <Paper sx={{ width: '100%', overflow: 'hidden', marginTop:'2rem' }}>
+                    <TableContainer sx={{ maxHeight: 440 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                                <TableHead >
+                                    <TableRow>
+                                        <TableCell sx={{fontWeight:'bold', fontSize:'large'}}>닉네임</TableCell>
+                                        <TableCell sx={{fontWeight:'bold', fontSize:'large'}}>댓글</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                {comments.map(({writer, content}) => (
+                                      <TableRow >
+                                          <TableCell>{writer}</TableCell>
+                                          <TableCell>{content}</TableCell>
+                                      </TableRow>
+                                  ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
                 </div>
             </div>
         </Box>

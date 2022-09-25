@@ -19,7 +19,6 @@
 > 3. Firebase의 Firestore를 활용하여 트랜잭션없이 실시간으로 DB가 갱신되고 최신의 정보를 제공할 수 있게 구현하였습니다.
 ---
 ## 시연영상
-임시  
 [![Video Label](http://img.youtube.com/vi/W9Gl-UW2I6U/0.jpg)](https://youtu.be/W9Gl-UW2I6U)
 ---
 >**Note**

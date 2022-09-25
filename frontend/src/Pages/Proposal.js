@@ -18,7 +18,6 @@ var dic = {};
 tag_name.forEach((key, i) => dic[key] = board_name[i]);
 
 function Proposal() {
-    var day = '';
     const { id } = useParams();
     const [document, setDocument] = useState({
         title: '',
@@ -35,6 +34,17 @@ function Proposal() {
         content: ''
     })
     const [comments, setComments] = useState([]);
+    const [day, setDay] = useState();
+    var commentsList = '';
+
+    const commentChange = (event) => {
+        const { name, value } = event.target;
+
+        setComment({
+            ...comment,
+            [name]: value
+        })
+    }
 
     const submitComment = () => {
         axios.post('/api/fb/insertComment', {
@@ -48,46 +58,28 @@ function Proposal() {
         }).then((response)=> {
             alert("등록 완료");
             console.log(response.data);
-            setComments(comments => [...comments, comment]);
+            setComments([...comments, comment]);
         })
     };
 
-    const commentChange = (event) => {
-        const { name, value } = event.target;
-
-        setDoc({
-            ...comment,
-            [name]: value
-        })
-    }
-
     useEffect(() => {
-        axios.get('/api/fb/doc', {
-            params: {
-                id: id
-            }
-        })
-        .then(response => {
-          setDocument(response.data.content);
-        })
-        .catch(error => console.log(error));
-
-        axios.get('/api/fb/comment', {
-            params: {
-                id: id
-            }
-        })
-        .then(response => {
-            setComments(response.data.content);
-        })
-        .catch(error => console.log(error));
+        axios
+            .all([axios.get('/api/fb/doc', {params:{id: id}}), axios.get('/api/fb/comment', {params:{id: id}})])
+            .then (
+                axios.spread((res1, res2) => {
+                    setDocument(res1.data.content);
+                    setComments(res2.data.comment);
+                })
+            ).catch((err) => console.log(err));
     }, [])
 
     useEffect(() => {
-        console.log(document);
         if (document['date'] !== '') {
-            day = new Date(document['date']['seconds']*1000);
-            day = day.toLocaleDateString('ko-KR');
+            var tmp = new Date(document['date']['seconds']*1000);
+            tmp = tmp.toLocaleDateString('ko-KR');
+            setDay(tmp);
+            console.log('day change');
+            console.log(day);
         }
     }, [document]);
 
@@ -148,11 +140,11 @@ function Proposal() {
                       onClick={submitComment}
                     >작성</Button>
                 </div>
-                {/* <div>
-                    {comments.map(({writer, content}) => (
-                        {writer}{content}
-                    ))}
-                </div> */}
+                <div>
+                    {comments.map(({writer, content, date}) => 
+                        <div>{writer}{content}</div>
+                    )}
+                </div>
             </div>
         </Box>
     </div>

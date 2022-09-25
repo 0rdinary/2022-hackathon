@@ -98,7 +98,9 @@ function Board() {
                         <TableBody>
                           {documents.map(({id, title, writer, date, up}) => (
                               <TableRow key={id}>
-                                  <TableCell>{title}</TableCell>
+                                  <Link to={'/doc/view/'+id}>
+                                      <TableCell>{title}</TableCell>
+                                  </Link>
                                   <TableCell>{writer}</TableCell>
                                   <TableCell>{date}</TableCell>
                                   <TableCell>{up}</TableCell>

@@ -1,7 +1,7 @@
+import React, { useEffect } from "react";
 import { FiberManualRecord, ThumbDown, ThumbUp } from "@mui/icons-material";
 import axios from 'axios';
 import { Box } from "@mui/system";
-import React from "react";
 import Grid from '@mui/material/Grid';
 import { useLocation, useParams } from 'react-router-dom';
 import "./Proposal.css"
@@ -30,9 +30,9 @@ function Proposal(){
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get('/api/fb/documents', {
+        axios.get('/api/fb/doc', {
             params: {
-                tag: props.tag
+                id: id
             }
         })
         .then(response => {

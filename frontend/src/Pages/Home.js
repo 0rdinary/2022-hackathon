@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
 import ListItemText from '@mui/material/ListItemText';
 import { useLocation } from 'react-router-dom';
+import Carousel from 'react-material-ui-carousel';
+import Button from '@mui/material/Button'
 import axios from 'axios';
 import {
     ContentPaste,
@@ -44,16 +46,42 @@ function Home(){
         'DeepSkyBlue', 'gold', 'purple'];
     
     const location = useLocation();
-    const [documents, setDocuments] = useState([{tag:'a', title:'b', up: 5}, {tag:'c', title:'d', up: 10}, {tag:'d', title:'e', up: 15}]);
+    const [documents, setDocuments] = useState([{tag:'1', title:'1번 콘텐츠', up: 5}, {tag:'2', title:'2번 콘텐츠', up: 10}, {tag:'3', title:'3번 콘텐츠', up: 15}]);
     const [index, setIndex] = useState(0);
 
     var obTimeOut;
     var tempIndex = -1;
-    function MainProposalChangeON(){
-        tempIndex = (tempIndex + 1) % 3;
-        setIndex(tempIndex);
-        console.log(tempIndex);
-        obTimeOut = setTimeout(MainProposalChangeON, 5000);
+
+    // function MainProposalChangeON(){
+    //     tempIndex = (tempIndex + 1) % 3;
+    //     setIndex(tempIndex);
+    //     console.log(tempIndex);
+    //     obTimeOut = setTimeout(MainProposalChangeON, 5000);
+    // }
+
+    function Item(props)
+    {
+        return (
+            // <Grid>
+            //     <h2>{props.item.name}</h2>
+            //     <p>{props.item.description}</p>
+            //
+            //     <Button className="CheckButton">
+            //         Check it out!
+            //     </Button>
+            // </Grid>
+            <Grid sx={{width:'100%'}}>
+                <Grid item xs>
+                    <text className="mainbox_tag">- {props.item.tag} -</text>
+                </Grid>
+                <Grid item xs>
+                    <text className="mainbox_head">{props.item.title}</text>
+                </Grid>
+                <Grid item xs>
+                    <ThumbUp/> <text>{props.item.up}  </text>
+                </Grid>
+            </Grid>
+        )
     }
         // useEffect(() => {
         //     axios.get('/api/fb/top')
@@ -79,7 +107,7 @@ function Home(){
     
         useEffect(() => {
           console.log(documents);
-          MainProposalChangeON();
+          // MainProposalChangeON();
         }, [documents]);
 
     return(
@@ -87,17 +115,11 @@ function Home(){
             <div>
                 <h2>주요 제안</h2>  
                 <Box sx={{width:'100%', height:300, border:1, borderRadius:'10%'}}>
-                    <Grid container direction="column" alignItems="center">
-                        <Grid item xs>
-                            <text className="mainbox_tag">- {documents[index].tag} -</text>
-                        </Grid>
-                        <Grid item xs>
-                            <text className="mainbox_head">{documents[index].title}</text>
-                        </Grid>
-                        <Grid item xs>
-                            <ThumbUp/> <text>{documents[index].up}  </text>
-                        </Grid>
-                    </Grid>
+                    <Carousel>
+                        {
+                            documents.map( (item, i) => <Item key={i} item={item} /> )
+                        }
+                    </Carousel>
                 </Box>
                 <div>
                     <h2>카테고리 별</h2>

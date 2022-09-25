@@ -29,7 +29,14 @@ function Board() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [documents, setDocuments] = useState([]);
+    const [refresh, setRefresh] = useState();
 
+    var tempTag;
+    function Refresh(){
+      if(tempTag != tag)  setRefresh();
+      tempTag = tag;
+      setTimeout(Refresh, 1000);
+    }
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -69,6 +76,7 @@ function Board() {
 
     useEffect(() => {
       console.log(documents);
+      Refresh();
     }, [documents]);
 
   return (

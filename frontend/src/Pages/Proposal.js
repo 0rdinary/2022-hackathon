@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ThumbDown, ThumbUp } from "@mui/icons-material";
+import { DocumentScanner, ThumbDown, ThumbUp } from "@mui/icons-material";
 import axios from 'axios';
 import { Box } from "@mui/system";
 import Button from '@mui/material/Button';
@@ -70,6 +70,40 @@ function Proposal() {
         })
     };
 
+    const submitUp = () => {
+        axios.get('/api/fb/vote', { params : {
+            id: id,
+            way: "up"
+        }},{
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then((response)=> {
+            var u = document['up'] + 1;
+            setDocument({
+                ...document,
+                up: u
+            })
+        })
+    }
+
+    const submitDown = () => {
+        axios.get('/api/fb/vote', { params : {
+            id: id,
+            way: "down"
+        }},{
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then((response)=> {
+            var d = document['down'] + 1;
+            setDocument({
+                ...document,
+                down: d
+            })
+        })
+    }
+
     useEffect(() => {
         axios
             .all([axios.get('/api/fb/doc', {params:{id: id}}), axios.get('/api/fb/comment', {params:{id: id}})])
@@ -82,6 +116,7 @@ function Proposal() {
     }, [])
 
     useEffect(() => {
+        console.log(document);
         if (document['date'] !== '') {
             var tmp = new Date(document['date']['seconds']*1000);
             tmp = tmp.toLocaleDateString('ko-KR');
@@ -128,9 +163,9 @@ function Proposal() {
                     </div>
                 </div>
                 <div className="thumbs">
-                    <ThumbUp/> <text className="thumbs_text">{document.up}  </text>
+                    <ThumbUp onClick={submitUp}/> <text className="thumbs_text">{document.up}  </text>
                     <text>  |  </text>
-                    <ThumbDown/> <text className="thumbs_text">{document.down}</text>
+                    <ThumbDown onClick={submitDown}/> <text className="thumbs_text">{document.down}</text>
                 </div>
                 <div>
                     <TextField sx={{width: '15%', height:'10%'}}

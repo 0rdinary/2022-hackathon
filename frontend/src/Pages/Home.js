@@ -36,7 +36,10 @@ function Home(){
                  "도시주택/건설", "행정/재정/세정"]
     var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
                 "environment", "safety", "construction", "administration"];
-    
+
+    var dic = {};
+    tag_name.forEach((key, i) => dic[key] = board_name[i]);
+
     const icons = [Piano, DepartureBoard, Diversity1, 
         FamilyRestroom, MedicalInformation, Paid, Landscape, 
         FireTruck, Foundation, ReceiptLong, ContentPaste];
@@ -72,10 +75,10 @@ function Home(){
             // </Grid>
             <Grid sx={{width:'100%'}}>
                 <Grid item xs>
-                    <text className="mainbox_tag">- {props.item.tag} -</text>
+                    <text className="mainbox_tag">- dic[{props.item.tag}] -</text>
                 </Grid>
                 <Grid item xs>
-                    <text className="mainbox_head">{props.item.title}</text>
+                    <Link to={'/doc/view/'+props.item.id} className="mainbox_head">{props.item.title}</Link>
                 </Grid>
                 <Grid item xs>
                     <ThumbUp/> <text>{props.item.up}  </text>

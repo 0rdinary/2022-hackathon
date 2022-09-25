@@ -46,7 +46,7 @@ function Home(){
         'DeepSkyBlue', 'gold', 'purple'];
     
     const location = useLocation();
-    const [documents, setDocuments] = useState([{tag:'1', title:'1번 콘텐츠', up: 5}, {tag:'2', title:'2번 콘텐츠', up: 10}, {tag:'3', title:'3번 콘텐츠', up: 15}]);
+    const [documents, setDocuments] = useState([]);
     const [index, setIndex] = useState(0);
 
     var obTimeOut;
@@ -83,38 +83,30 @@ function Home(){
             </Grid>
         )
     }
-        // useEffect(() => {
-        //     axios.get('/api/fb/top')
-        //     .then(response => {
-        //       var d = response.data.list;
-        //       var d_size = d.length;
-        //       console.log(d);
-              
-        //       for (var i = 0; i < d_size; i++) {
-        //           var tmp = {}
-        //           var day = new Date(d[i]['date']['seconds']*1000);
-        //           console.log(day);
-        //           tmp['id'] = d[i]['id'];
-        //           tmp['title'] = d[i]['title'];
-        //           tmp['tag'] = d[i]['tag'];
-        //           tmp['writer'] = d[i]['writer'];
-        //           tmp['up'] = d[i]['up'];
-        //           setDocuments(documents => [tmp, ...documents]);
-        //       }
-        //     })
-        //     .catch(error => console.log(error));
-        // }, [])
-    
         useEffect(() => {
-          console.log(documents);
-          // MainProposalChangeON();
-        }, [documents]);
+            axios.get('/api/fb/top')
+            .then(response => {
+                setDocuments(documents => [...documents, response.data.list[0]]);
+                setDocuments(documents => [...documents, response.data.list[1]]);
+                setDocuments(documents => [...documents, response.data.list[2]]);
+                setDocuments(documents => [...documents, response.data.list[3]]);
+                setDocuments(documents => [...documents, response.data.list[4]]);
+                // for(var i=0;i<5;i++)
+                // {
+                //     setDocuments(documents=>[...documents, response.data.list[i]]);
+                // }
 
+              console.log(documents);
+            })
+            .catch(error => console.log(error));
+        }, []) //documents 기입시 플젝망함
+
+    console.log(documents);
     return(
         <div className="home">
             <div>
                 <h2>주요 제안</h2>  
-                <Box sx={{width:'100%', height:300, border:1, borderRadius:'10%'}}>
+                <Box sx={{width:'100%', border:1, borderRadius:'5%'}}>
                     <Carousel>
                         {
                             documents.map( (item, i) => <Item key={i} item={item} /> )

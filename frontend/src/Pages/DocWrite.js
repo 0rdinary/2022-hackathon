@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교육",
                  "건강/보건/위생", "산업/경제", "환경", "소방/안전",
@@ -18,9 +18,13 @@ var board_name = ["문화/관광/체육", "교통", "복지", "여성/가족/교
 var tag_name = ["culture", "traffic", "welfare", "education", "health", "economy",
                 "environment", "safety", "construction", "administration"];
 
+var dic = {};
+tag_name.forEach((key, i) => dic[key] = board_name[i]);
+
 function DocWrite() {
     const location = useLocation();
     const props = location.state;
+    const navigate = useNavigate();
 
     const [doc, setDoc] = useState({
         writer: '',
@@ -58,7 +62,12 @@ function DocWrite() {
             }
         }).then((response)=> {
             alert("등록 완료");
-            console.log(response.data);
+            navigate('/board', {
+                state: {
+                    name: dic[doc.tag],
+                    tag: doc.tag
+                }
+            })
         })
     };
 

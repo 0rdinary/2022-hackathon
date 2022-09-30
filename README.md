@@ -25,4 +25,4 @@
 > Firebase SDK 키 파일이 Spring 실행파일과 함께 있어야 정상적으로 DB와 통신가능한 서비스입니다.  
 
 >**Note**
-> AWS 결제 이슈로 현재 개인 공유기로 배포중입니다. http://daeily.iptime.org/
+> 현재 서비스 배포를 중단한 상태입니다.
